@@ -1,0 +1,79 @@
+<section id="hero" class="gradient-custom-3 vh-50">
+  <div class="container py-15 h-100">
+    <div class="row justify-content-center align-items-center h-100">
+      <div class="col-md-12 col-lg-10 col-xl-8">
+        <div class="card shadow-2-strong card-registration" style="border-radius: 15px;">
+          <div class="card-body p-4 p-md-5">
+            <h3 class="mb-4 pb-2 pb-md-0 mb-md-5">Registracija</h3>
+            <form [formGroup]="form" (submit)="register()">
+
+              <div class="row">
+                <div class="col-md-6 mb-4">
+
+                  <div class="form-outline">
+                    <input type="text" formControlName="ime" class="form-control form-control-lg" />
+                    <label class="form-label" for="ime">Ime</label>
+                  </div>
+
+                </div>
+                <div class="col-md-6 mb-4">
+
+                  <div class="form-outline">
+                    <input type="text" formControlName="prezime" class="form-control form-control-lg" />
+                    <label class="form-label" for="prezime">Prezime</label>
+                  </div>
+
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-6 mb-4 d-flex align-items-center">
+
+                  <div class="form-outline datepicker w-100">
+                    <input type="text" class="form-control form-control-lg" formControlName="username" />
+                    <label for="username" class="form-label">Username</label>
+                  </div>
+
+                </div>
+                <div class="col-md-6 mb-4">
+
+                  <div class="form-outline datepicker w-100">
+                    <input type="email" class="form-control form-control-lg" formControlName="username" />
+                    <label for="username" class="form-label">Email</label>
+                  </div>
+
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-6 mb-4">
+                  <div class="form-outline">
+                    <input type="password" formControlName="password" class="form-control form-control-lg" id="password" />
+                    <label class="form-label" for="password">Password</label>
+                  </div>
+                </div>
+                <div class="col-md-6 mb-4">
+                  <div class="form-outline">
+                    <input type="date" formControlName="datum" class="form-control form-control-lg" id="datum" />
+                    <label class="form-label" for="datum">Datum rodjenja</label>
+                  </div>
+                </div>
+              </div>
+              
+
+              <div class="row">
+                <input type="file" (change)="onFileChange($event)" formControlName="slika" class="form-control form-control-lg" id="slika" />
+                <label class="form-label" for="slika">Izaberi sliku</label>
+              </div>
+
+              <div class="mt-4 pt-2">
+                <button class="btn btn-primary" type="submit">Registruj se</button>
+              </div>
+
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

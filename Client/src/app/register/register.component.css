@@ -1,0 +1,138 @@
+.gradient-custom-3 {
+    /* fallback for old browsers */
+    background: #84fab0;
+    
+    /* Chrome 10-25, Safari 5.1-6 */
+    background: -webkit-linear-gradient(to right, rgba(132, 250, 176, 0.5), rgba(143, 211, 244, 0.5));
+    
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background: linear-gradient(to right, rgba(132, 250, 176, 0.5), rgba(143, 211, 244, 0.5))
+    }
+    .gradient-custom-4 {
+    /* fallback for old browsers */
+    background: #84fab0;
+    
+    /* Chrome 10-25, Safari 5.1-6 */
+    background: -webkit-linear-gradient(to right, rgba(132, 250, 176, 1), rgba(143, 211, 244, 1));
+    
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background: linear-gradient(to right, rgba(132, 250, 176, 1), rgba(143, 211, 244, 1))
+    }
+    #hero {
+        width: 100%;
+        height: 100vh;
+        background: url("../../assets/images/ribolov.jpg") top center;
+        background-size: cover;
+        position: relative;
+      }
+      #hero:before {
+        content: "";
+        background: rgba(0, 0, 0, 0.6);
+        position: absolute;
+        bottom: 0;
+        top: 0;
+        left: 0;
+        right: 0;
+      }
+      
+      #hero .container {
+        position: relative;
+        padding-top: 74px;
+        text-align: center;
+      }
+      
+      #hero h1 {
+        margin: 0;
+        font-size: 56px;
+        font-weight: 700;
+        line-height: 64px;
+        color: #fff;
+        font-family: "Poppins", sans-serif;
+      }
+      
+      #hero h1 span {
+        color: #ffc451;
+      }
+      
+      #hero h2 {
+        color: rgba(255, 255, 255, 0.9);
+        margin: 10px 0 0 0;
+        font-size: 24px;
+      }
+      
+      #hero .icon-box {
+        padding: 30px 20px;
+        transition: ease-in-out 0.3s;
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        height: 100%;
+        text-align: center;
+      }
+      
+      #hero .icon-box i {
+        font-size: 32px;
+        line-height: 1;
+        color: #ffc451;
+      }
+      
+      #hero .icon-box h3 {
+        font-weight: 700;
+        margin: 10px 0 0 0;
+        padding: 0;
+        line-height: 1;
+        font-size: 20px;
+        line-height: 26px;
+      }
+      
+      #hero .icon-box h3 a {
+        color: #fff;
+        transition: ease-in-out 0.3s;
+      }
+      
+      #hero .icon-box h3 a:hover {
+        color: #ffc451;
+      }
+      
+      #hero .icon-box:hover {
+        border-color: #ffc451;
+      }
+      /* Stilovi za pomeranje teksta iznad input polja */
+.input-group label {
+  position: absolute;
+  top: -1.5rem;
+  left: 1rem;
+  background-color: white;
+  padding: 0 0.5rem;
+  z-index: 1;
+  transition: top 0.3s, left 0.3s, font-size 0.3s;
+  pointer-events: none;
+}
+
+.input-group input:focus + label, .input-group input:not(:placeholder-shown) + label {
+  top: -2.5rem;
+  left: 0.8rem;
+  font-size: 0.8rem;
+}
+
+/* Stilovi za smanjenje veličine forme */
+.card {
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+/* Ostali stilovi */
+.visually-hidden {
+  position: absolute;
+  clip: rect(0, 0, 0, 0);
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+.card-registration .select-input.form-control[readonly]:not([disabled]) {
+  font-size: 1rem;
+  line-height: 2.15;
+  padding-left: .75em;
+  padding-right: .75em;
+  }
+  .card-registration .select-arrow {
+  top: 13px;
+  }
