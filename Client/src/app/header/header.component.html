@@ -9,12 +9,13 @@
         <li><a class="nav-link scrollto"><a href="#" class="nav-link px-2" *ngIf="authenticated">Moja ribolovna mesta</a></a></li>
         <li><a class="nav-link scrollto"><a href="#" class="nav-link px-2" *ngIf="authenticated">Profil</a></a></li>
       </ul>
+      <i class="bi bi-list mobile-nav-toggle"></i>
     </nav><!-- .navbar -->
-    <div class="col-md-3 text-end" *ngIf="!authenticated">
+    <div class="col-md-3 text-end" *ngIf="!isLoggedIn">
       <a routerLink="/login" type="button" class="get-started-btn scrollto">Login</a>
       <a routerLink="/register" type="button" class="get-started-btn scrollto">Register</a>
     </div>
-    <div class="col-md-3 text-end" *ngIf="authenticated">
+    <div class="col-md-3 text-end" >
       <a routerLink="/login" type="button" class="get-started-btn scrollto" (click)="logout()">Logout</a>
     </div>
 

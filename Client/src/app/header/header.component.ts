@@ -2,6 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { Emitters } from '../emitters/emitters';
 import { HttpClient } from '@angular/common/http';
 import { AuthService } from '../services/authService.service';
+import { Store, select } from '@ngrx/store';
+import { UserState } from '../store/types/user.interface';
+import * as UserActions from '../store/actions/user.actions'
+import { User } from '../store/types/user.module';
+import { selectUserState, selectorLoggedin } from '../store/selectors/user.selectors';
 
 @Component({
   selector: 'app-header',
@@ -9,20 +14,26 @@ import { AuthService } from '../services/authService.service';
   styleUrls: ['./header.component.css'],
 })
 export class HeaderComponent implements OnInit {
-  authenticated = false;
+  authenticated = true;
+  user!: User | null;
+  isLoggedIn!: boolean;
+
   constructor(
     private httpClient: HttpClient,
-    private authService: AuthService
-  ) {}
+    private authService: AuthService,
+    private store:Store<UserState>
+
+  ) {
+  }
   ngOnInit(): void {
-    Emitters.authEmmiter.subscribe((auth: boolean) => {
-      this.authenticated = auth;
+    this.store.pipe(select(selectUserState)).subscribe((userState) => {
+      this.isLoggedIn = userState.isLoggedIn;
+      this.authenticated=userState.isLoggedIn
+      console.log(this.isLoggedIn)
     });
   }
   logout(): void {
-    localStorage.removeItem('loggedUser');
-    this.authService.logout().subscribe(() => {
-      this.authenticated = false;
-    });
+    this.user=null
+    this.store.dispatch(UserActions.logOutUser());
   }
 }

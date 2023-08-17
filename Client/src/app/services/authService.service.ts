@@ -8,25 +8,15 @@ import { Emitters } from '../emitters/emitters';
 export class AuthService {
   constructor(private http: HttpClient) {}
 
-  checkAuthentication() {
-    this.http
-      .get('http://localhost:3000/user/getLoggedUser', {
-        withCredentials: true,
-      })
-      .subscribe(
-        (res) => {
-          Emitters.authEmmiter.emit(true);
-        },
-        (err) => {
-          Emitters.authEmmiter.emit(false);
-        }
-      );
-  }
   logout() {
     return this.http.post(
       'http://localhost:3000/user/logout',
       {},
       { withCredentials: true }
     );
+  }
+  getLoggedUser(){
+    const user = this.http.get('http://localhost:3000/user/getLoggedUser',{withCredentials:true})
+    return user
   }
 }

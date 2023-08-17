@@ -1,4 +1,5 @@
-import { NgModule } from '@angular/core';
+import { reducers } from './store/reducers/user.reducers';
+import { NgModule, isDevMode } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -15,6 +16,10 @@ import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { environment } from './environments/environment';
 import { FooterComponent } from './footer/footer.component';
+import { StoreModule } from '@ngrx/store';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { EffectsModule } from '@ngrx/effects';
+import { UserEffects } from './store/effects/user.effects';
 @NgModule({
   declarations: [
     AppComponent,
@@ -32,7 +37,10 @@ import { FooterComponent } from './footer/footer.component';
     ReactiveFormsModule,
     HttpClientModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
-    AngularFirestoreModule
+    AngularFirestoreModule,
+    StoreModule.forRoot({reducers}, {}),
+    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() }),
+    EffectsModule.forRoot([UserEffects])
   ],
   providers: [BsDatepickerConfig],
   bootstrap: [AppComponent]

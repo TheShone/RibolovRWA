@@ -3,20 +3,29 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { LoginService } from '../services/loginService.service';
+import { UserState } from '../store/types/user.interface';
+import { Observable } from 'rxjs';
+import { Store, select } from '@ngrx/store';
+import { selectorLoading, selectorLoggedin } from '../store/selectors/user.selectors';
+import * as UserActions from '../store/actions/user.actions'
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  form!:FormGroup
+  form!:FormGroup;
+  isLoading$:Observable<boolean>;
+  isLoggedIn$:Observable<boolean>;
   constructor(
     private formBuilder:FormBuilder,
     private http:HttpClient,
     private router:Router,
-    private loginService: LoginService
+    private loginService: LoginService,
+    private store:Store<UserState>
   ){
-
+    this.isLoading$= this.store.pipe(select(selectorLoading))
+    this.isLoggedIn$=this.store.pipe(select(selectorLoggedin))
   }
   ngOnInit(): void {
     this.form=this.formBuilder.group({
@@ -25,18 +34,7 @@ export class LoginComponent implements OnInit {
     })
   }
   login():void{
-    const username = this.form.get('username')?.value;
-    const password = this.form.get('password')?.value;
-
-    this.loginService.login(username, password)
-      .subscribe(
-        (response) => {
-          localStorage.setItem('loggedUser', JSON.stringify(response));
-          this.router.navigate(['/']);
-        },
-        () => {
-          alert('Pogresno korisnicko ime ili sifra');
-        }
-      );
+    const credentials = this.form.value;
+    this.store.dispatch(UserActions.loginUser({user:{username:credentials.username,password:credentials.password}}))
   }
 }
