@@ -24,7 +24,6 @@ export class UserModel implements User {
       username?: string,
       email?: string,
       password?: string,
-      role?: string,
       datumRodjenja?: Date,
       slika?: string
     ) {
@@ -33,7 +32,7 @@ export class UserModel implements User {
       this.username = username;
       this.email = email;
       this.password = password;
-      this.role = role;
+      this.role = "user";
       this.datumRodjenja = datumRodjenja;
       this.slika = slika;
     }

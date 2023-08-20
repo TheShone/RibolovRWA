@@ -5,7 +5,7 @@
     <nav id="navbar" class="navbar order-last order-lg-0">
       <ul>
         <li><a routerLink="/" class="nav-link px-2 link-secondary"><a class="nav-link scrollto active">Home</a></a></li>
-        <li><a class="nav-link scrollto" href="#about">Ribolovna mesta</a></li>
+        <li><a class="nav-link scrollto" routerLink="/ribolovnaMesta">Ribolovna mesta</a></li>
         <li><a class="nav-link scrollto"><a href="#" class="nav-link px-2" *ngIf="authenticated">Moja ribolovna mesta</a></a></li>
         <li><a class="nav-link scrollto"><a href="#" class="nav-link px-2" *ngIf="authenticated">Profil</a></a></li>
       </ul>
@@ -15,7 +15,7 @@
       <a routerLink="/login" type="button" class="get-started-btn scrollto">Login</a>
       <a routerLink="/register" type="button" class="get-started-btn scrollto">Register</a>
     </div>
-    <div class="col-md-3 text-end" >
+    <div class="col-md-3 text-end" *ngIf="isLoggedIn">
       <a routerLink="/login" type="button" class="get-started-btn scrollto" (click)="logout()">Logout</a>
     </div>
 

@@ -6,7 +6,7 @@ import { Store, select } from '@ngrx/store';
 import { UserState } from '../store/types/user.interface';
 import * as UserActions from '../store/actions/user.actions'
 import { User } from '../store/types/user.module';
-import { selectUserState, selectorLoggedin } from '../store/selectors/user.selectors';
+import { selectUserFeature, selectorLoggedin } from '../store/selectors/user.selectors';
 
 @Component({
   selector: 'app-header',
@@ -26,10 +26,9 @@ export class HeaderComponent implements OnInit {
   ) {
   }
   ngOnInit(): void {
-    this.store.pipe(select(selectUserState)).subscribe((userState) => {
+    this.store.pipe(select(selectUserFeature)).subscribe((userState) => {
       this.isLoggedIn = userState.isLoggedIn;
       this.authenticated=userState.isLoggedIn
-      console.log(this.isLoggedIn)
     });
   }
   logout(): void {

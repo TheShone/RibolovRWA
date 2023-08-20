@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { NgbDateStruct, NgbCalendar, NgbDatepickerConfig } from '@ng-bootstrap/ng-bootstrap';
-import { NgbDate } from '@ng-bootstrap/ng-bootstrap';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import {HttpClient} from "@angular/common/http"
 import { Router } from '@angular/router';

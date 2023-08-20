@@ -14,6 +14,15 @@ export class AppComponent implements OnInit {
 
   }
   ngOnInit(): void {
-    this.store.dispatch(UserActions.browserRolead({isLoading:false,isLoggedin:true}))
+    let loggedIn = false
+    if(localStorage.getItem('isLoggedIn'))
+    {
+      loggedIn=true;
+    }
+    else
+    {
+      loggedIn=false;
+    }
+    this.store.dispatch(UserActions.browserRolead({ isLoading: false, isLoggedin: loggedIn }));
   }
 }

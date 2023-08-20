@@ -1,17 +1,16 @@
 import { createFeatureSelector, createSelector } from "@ngrx/store";
 import { UserState } from "../types/user.interface";
 
-export const selectUserState = (state: UserState) => state;
-
+export const selectUserFeature = createFeatureSelector<UserState>('user');
 export const selectorLoading = createSelector(
-    selectUserState,
+    selectUserFeature,
     (state:UserState)=>state.isLoading
 );
 export const selectorLoggedin = createSelector(
-    selectUserState,
+    selectUserFeature,
     (state:UserState)=>state.isLoggedIn
 );
 export const selectorError = createSelector(
-    selectUserState,
+    selectUserFeature,
     (state:UserState)=>state.error
 );

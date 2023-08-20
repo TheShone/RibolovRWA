@@ -1,0 +1,55 @@
+:root {
+    --gradient: linear-gradient(to left top, #DD2476 10%, #FF512F 90%) !important;
+  }
+  
+  body {
+    background: #111 !important;
+  }
+  #glavni{
+
+    padding: 100px;
+
+    align-items: center;
+    justify-items: center;
+    text-align: center;
+    display: grid;
+
+    grid-template-columns: repeat(3, 1fr);
+
+    grid-auto-rows: auto;
+
+    grid-gap: 1rem;
+
+  }
+  .card {
+    background: #222222;
+    border: 1px solid #dd2476;
+    color: rgba(250, 250, 250, 0.8);
+    margin-bottom: 2rem;
+  }
+  
+  .btn {
+    border: 5px  #fff !important;
+    border-image-slice: 1;
+    background: var(--gradient) !important;
+    -webkit-text-fill-color:  #fff !important;
+    border-image-source:  var(--gradient) !important; 
+    text-decoration: none;
+    transition: all .4s ease;
+  }
+  
+  .btn:hover, .btn:focus {
+        background: var(--gradient) !important;
+    -webkit-text-fill-color: #fff !important;
+    border: 5px solid #fff !important; 
+    box-shadow: #222 1px 0 10px;
+    text-decoration: underline;
+  }
+
+  .fixed-image {
+    height: 200px; 
+    object-fit: cover; 
+  }
+  .loading-text {
+    font-size: 30px; 
+  }

@@ -8,7 +8,6 @@ import { HeaderComponent } from './header/header.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { HomeComponent } from './home/home.component';
-import { BsDatepickerModule, BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; 
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
@@ -20,6 +19,13 @@ import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { EffectsModule } from '@ngrx/effects';
 import { UserEffects } from './store/effects/user.effects';
+import { RibolovnaMestaComponent } from './ribolovna-mesta/ribolovna-mesta.component';
+import { RibolovnoMestoComponent } from './ribolovno-mesto/ribolovno-mesto.component';
+import { RibolovnaMestaEffects } from './store/effects/ribMesta.effects';
+import { reducers2 } from './store/reducers/ribMesta.reducers';
+import { reducers3 } from './store/reducers/ribMesto.reducers';
+import { RibolovnoMestoEffects } from './store/effects/ribMesto.effects';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -27,22 +33,22 @@ import { UserEffects } from './store/effects/user.effects';
     LoginComponent,
     RegisterComponent,
     HomeComponent,
-    FooterComponent
+    FooterComponent,
+    RibolovnaMestaComponent,
+    RibolovnoMestoComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    BsDatepickerModule.forRoot(),
     ReactiveFormsModule,
     HttpClientModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFirestoreModule,
-    StoreModule.forRoot({reducers}, {}),
+    StoreModule.forRoot({user:reducers,ribMesta:reducers2,ribMesto:reducers3}, {}),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() }),
-    EffectsModule.forRoot([UserEffects])
+    EffectsModule.forRoot([UserEffects,RibolovnaMestaEffects,RibolovnoMestoEffects])
   ],
-  providers: [BsDatepickerConfig],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

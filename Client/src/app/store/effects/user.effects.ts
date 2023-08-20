@@ -32,6 +32,7 @@ export class UserEffects{
             tap(() => {
                 this.authService.getLoggedUser().subscribe((user)=>{
                     localStorage.setItem('loggedUser', JSON.stringify(user));
+                    localStorage.setItem('isLoggedIn',"true");
                 })
                 this.router.navigate(['/']);
 
@@ -52,19 +53,15 @@ export class UserEffects{
         this.actions$.pipe(
             ofType(UserActions.logOutUserSuccess),
             tap(() => {
-                localStorage.removeItem("loggedUser")                
+                localStorage.removeItem("loggedUser")
+                localStorage.removeItem('isLoggedIn');                
                 this.router.navigate(['/']);
 
             })
         ),
         { dispatch: false } 
     );
-    // init$ = defer(() => {
-    //    const user = localStorage.getItem('loggedUser');
-    //    if(user){
-    //       return this.loginService.login(user.user.username,user.user.password)
-    //    } 
-    // });
+    
     constructor(private actions$: Actions, private loginService:LoginService,private router:Router,private authService: AuthService){
         
     }
