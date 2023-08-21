@@ -1,3 +1,5 @@
+import { UserModel } from "./user.module";
+
 export interface RibolovnoMesto{
     id:string;
     Naziv: string;
@@ -8,7 +10,7 @@ export interface RibolovnoMesto{
     Longitude: number;
     datumPostavljanja: Date;
     slika: string;
-    userId: number;
+    user: UserModel;
 }
 export class RibolovnoMestoModel implements RibolovnoMesto {
     constructor(
@@ -21,6 +23,6 @@ export class RibolovnoMestoModel implements RibolovnoMesto {
         public Longitude: number,
         public datumPostavljanja: Date,
         public slika: string,
-        public userId: number
+        public user: UserModel
     ) {}
 }

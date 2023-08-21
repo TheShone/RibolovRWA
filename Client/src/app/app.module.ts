@@ -25,6 +25,11 @@ import { RibolovnaMestaEffects } from './store/effects/ribMesta.effects';
 import { reducers2 } from './store/reducers/ribMesta.reducers';
 import { reducers3 } from './store/reducers/ribMesto.reducers';
 import { RibolovnoMestoEffects } from './store/effects/ribMesto.effects';
+import {MatToolbarModule} from '@angular/material/toolbar'
+import {MatIconModule} from '@angular/material/icon'
+import {MatButtonModule} from '@angular/material/button';
+import { RatingComponent } from './utilities/rating/rating.component'
+import { DatePipe } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -35,13 +40,18 @@ import { RibolovnoMestoEffects } from './store/effects/ribMesto.effects';
     HomeComponent,
     FooterComponent,
     RibolovnaMestaComponent,
-    RibolovnoMestoComponent
+    RibolovnoMestoComponent,
+    RatingComponent
   ],
+  providers: [DatePipe],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     ReactiveFormsModule,
+    MatToolbarModule,
+    MatIconModule,
+    MatButtonModule,
     HttpClientModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFirestoreModule,

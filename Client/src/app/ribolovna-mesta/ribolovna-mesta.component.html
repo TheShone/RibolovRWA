@@ -4,22 +4,16 @@
   </ng-container>
   <ng-template #artPiecesTemplate>
     <ng-container *ngFor="let mesto of ribMesta$ | async" class="ng-container" >
-          <div class="container mx-auto mt-4">
-            <div class="row">
-              <div class="col-md-3">
-                <div class="card" style="width: 18rem;">
-                  <img [src]="mesto.slika" class="card-img-top fixed-image" alt="...">
-                  <div class="card-body">
-                    <h5 class="card-title">{{mesto.Naziv}}</h5>
-                    <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    <a [routerLink]="['/ribolovnoMesto', mesto.id]" class="btn mr-2"><i class="fas fa-link"></i> Visit Site</a>
-                    <a href="#" class="btn "><i class="fab fa-github"></i> Github</a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+      <div class="container">
+        <div class="wrapper">
+          <div class="banner-image" [ngStyle]="getBackgroundStyle(mesto.slika)"> </div>
+          <h1> {{mesto.Naziv}}</h1>
+          <p>by: {{mesto.user.username}} <br> published: {{formatDatumPostavljanja(mesto.datumPostavljanja)}}</p>
+        </div>
+         <div class="button-wrapper"> 
+           <button class="btn fill"><a [routerLink]="['/ribolovnoMesto', mesto.id]" class="btn mr-2">Detalji</a></button>
+         </div>
+           </div>
     </ng-container>
 </ng-template>
 </div>
