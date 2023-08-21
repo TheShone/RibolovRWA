@@ -3,38 +3,76 @@
         <div class="loading-text">Loading...</div>
       </ng-container>
       <ng-template #artPiecesTemplate>
-<div class="container py-4 my-4 mx-auto d-flex flex-column">
-    <div class="header">
-        <div class="row r1">
-            <div class="col-md-9 abc">
-                <h1>{{ (ribMesto$ | async)?.Naziv }}</h1>            </div>
-            <div class="col-md-3 text-right pqr"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></div>
-        </div>
-    </div>
-    <div class="container-body mt-4">
-        <div class="row r3">
-            <div class="col-md-5 p-0 klo">
-                <ul>
-                    <li>Tip ribe: {{ (ribMesto$ | async)?.TipRibe }}</li>
-                    <li>Platforma: {{ (ribMesto$ | async)?.PostojanjePlatforme }}</li>
-                    <li>Osvetljenost: {{ (ribMesto$ | async)?.Osvetljenost }}</li>
-                    <li>Latitude: {{ (ribMesto$ | async)?.Latitude }}</li>
-                    <li>Longitude: {{ (ribMesto$ | async)?.Longitude }}</li>
-                    <li *ngIf="(ribMesto$ | async)?.datumPostavljanja !== undefined">Datum Postavljanja: {{ formatDatumPostavljanja((ribMesto$ | async)?.datumPostavljanja) }}</li>
-                    <li>Oglasavac: {{ (ribMesto$ | async)?.user?.username }}</li>
-                </ul>
+        <div class="container">
+          <div class="card">
+            <div class="container-fliud">
+              <div class="wrapper row">
+                <div class="preview col-md-6">
+                  
+                  <div class="preview-pic tab-content">
+                    <div class="tab-pane active" id="pic-1"><img [src]="(ribMesto$ | async)?.slika" /></div>
+                  </div>
+                  
+                </div>
+                <div class="details col-md-6">
+                  <h3 class="product-title">{{ (ribMesto$ | async)?.Naziv }}</h3>
+                  <h4 class="price">Tip robe: <span>{{ (ribMesto$ | async)?.TipRibe }}</span></h4>
+                  <h4 class="price">Platforma: <span>{{ (ribMesto$ | async)?.PostojanjePlatforme }}</span></h4>
+                  <h4 class="price">Osvetljenost: <span>{{ (ribMesto$ | async)?.Osvetljenost }}</span></h4>
+                  <h4 class="price">Latitude: <span>{{ (ribMesto$ | async)?.Latitude }}</span></h4>
+                  <h4 class="price">Longitude: <span>{{ (ribMesto$ | async)?.Longitude }}</span></h4>
+                  <h4 class="price">Datum Postavljanja: <span>{{ formatDatumPostavljanja((ribMesto$ | async)?.datumPostavljanja) }}</span></h4>
+                  <h4 class="price">Oglasavac: <span>{{ (ribMesto$ | async)?.user?.username }}</span></h4>
+                  
+                </div>
+                <section>
+                  <div>
+                    <div class="row d-flex justify-content-center">
+                      <div class="col-md-12 col-lg-10">
+                        <div class="card text-dark">
+                          <div class="card-body p-4">
+                            <h4 class="mb-0">Komentari</h4>
+                            <p class="fw-light mb-4 pb-2">Najskoriji komentari</p>
+                            <ng-container *ngIf="isLoading$ | async; else artPiecesTemplate" class="ng-container">
+                              <div class="loading-text">Loading...</div>
+                            </ng-container>
+                            <ng-template #artPiecesTemplate>
+                              <ng-container *ngFor="let komentar of komentari$ | async" class="ng-container" >
+                              <hr class="my-0" />
+      
+                              <div class="card-body p-4">
+                            <div class="d-flex flex-start">
+                              <img class="rounded-circle shadow-1-strong me-3"
+                                [src]="komentar.user.slika" alt="avatar" width="60"
+                                height="60" />
+                              <div>
+                                <h6 class="fw-bold mb-1">{{komentar.user.username}}</h6>
+                                  <div class="d-flex align-items-center mb-3">
+                                          <p class="mb-0">
+                                          {{formatDatumPostavljanjaa(komentar.datumPostavljanja)}}
+                                          </p>
+                                  </div>
+                                <p class="mb-0">
+                                  {{komentar.Opis}}
+                                </p>
+                                <app-rating [initialRating]="komentar.Ocena" [locked]="true"></app-rating>
+                              </div>
+                          </div>
+                          </div>
+                        </ng-container>
+                      </ng-template> 
+                        </div>
+                       </div>
+                      </div>
+                    </div>
+                  </div>
+              </section> 
+              </div>
+              
             </div>
-            <div class="col-md-7"> <img [src]="(ribMesto$ | async)?.slika" width="90%" height="95%"> </div>
+            
+          </div>
+          
         </div>
-    </div>
-    <div class="footer d-flex flex-column mt-5">
-        <div class="row r4">
-            <div class="col-md-2 myt des"><a href="#">Description</a></div>
-            <div class="col-md-2 myt "><a href="#">Review</a></div>
-            <div class="col-md-2 mio offset-md-4"><a href="#">ADD TO CART</a></div>
-            <div class="col-md-2 myt "><button type="button" class="btn btn-outline-warning"><a href="#">BUY NOW</a></button></div>
-        </div>
-    </div>
-</div>
       </ng-template>
 </div>

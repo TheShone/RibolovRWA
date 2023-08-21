@@ -11,32 +11,39 @@ export class RatingComponent implements OnInit {
   maxRatingArr:any = [];
   @Input() SelectedStar=0;
   previousSelection = 0;
+  @Input() initialRating = 0;
+  @Input() locked = false;
   @Output()
   onRaiting:EventEmitter<number> = new EventEmitter<number>();
   constructor(){
   }
   HandleMouseEnter(index:number)
     {
-      this.SelectedStar=index+1;
+      if (!this.locked) {
+        this.SelectedStar = index + 1;
+      }
     }
     HandleMouseLeave()
     {
-      if(this.previousSelection!==0)
-      {
-        this.SelectedStar=this.previousSelection;
-      }
-      else{
-        this.SelectedStar=0;
+      if (!this.locked) {
+        if (this.previousSelection !== 0) {
+          this.SelectedStar = this.previousSelection;
+        } else {
+          this.SelectedStar = 0;
+        }
       }
     }
     Rating(index: number)
     {
-      this.SelectedStar=index+1;
-      this.previousSelection=this.SelectedStar;
-      this.onRaiting.emit(this.SelectedStar);
+      if (!this.locked) {
+        this.SelectedStar = index + 1;
+        this.previousSelection = this.SelectedStar;
+        this.onRaiting.emit(this.SelectedStar);
+      }
     }
   ngOnInit(): void {
     this.maxRatingArr = Array(this.maxRating).fill(0);
+    this.SelectedStar = this.initialRating;
   }
 
 }

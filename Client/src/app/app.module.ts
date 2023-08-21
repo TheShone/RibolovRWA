@@ -30,6 +30,8 @@ import {MatIconModule} from '@angular/material/icon'
 import {MatButtonModule} from '@angular/material/button';
 import { RatingComponent } from './utilities/rating/rating.component'
 import { DatePipe } from '@angular/common';
+import { reducers4 } from './store/reducers/komentari.reducers';
+import { KomentariEffects } from './store/effects/komentari.effects';
 
 @NgModule({
   declarations: [
@@ -55,9 +57,9 @@ import { DatePipe } from '@angular/common';
     HttpClientModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFirestoreModule,
-    StoreModule.forRoot({user:reducers,ribMesta:reducers2,ribMesto:reducers3}, {}),
+    StoreModule.forRoot({user:reducers,ribMesta:reducers2,ribMesto:reducers3, komentari:reducers4}, {}),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() }),
-    EffectsModule.forRoot([UserEffects,RibolovnaMestaEffects,RibolovnoMestoEffects])
+    EffectsModule.forRoot([UserEffects,RibolovnaMestaEffects,RibolovnoMestoEffects,KomentariEffects])
   ],
   bootstrap: [AppComponent]
 })

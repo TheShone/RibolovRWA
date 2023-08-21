@@ -10,7 +10,6 @@ export class RibolovnoMestoEffects{
     this.actions$.pipe(
         ofType(RibolovnoMestoActions.getRibMesto),
         mergeMap((action)=> {
-            console.log("Pokrecem se za id: "+action.id )
             return this.ribolovnaMestaService.getRibolovnoMestoId(action.id).pipe(
                 map((ribMesto)=> RibolovnoMestoActions.getRibMestoSuccess({ribMesto})),
                 catchError((error)=>

@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Action } from '@ngrx/store';
 import { RibolovnoMestoModel } from '../store/types/ribolovnoMesto.module';
+import { KomentarModel } from '../store/types/komentar.module';
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +19,8 @@ export class RibolovnaMestaService {
 
   getRibolovnoMestoId(id:number): Observable<RibolovnoMestoModel>
   {
-    console.log("Pokrecem se")
+    console.log("pokrecem se")
     return this.http.get<RibolovnoMestoModel>(`http://localhost:3000/ribolovno-Mesto/getRibolovnoMesto/${id}`,{withCredentials:true})
   }
+
 }
