@@ -24,8 +24,6 @@ export class RibolovnaMestaComponent implements OnInit {
   }
   ngOnInit(): void {
       this.store.dispatch(RibolovnaMestaActions.getRibolovnaMesta())
-      this.ribMesta$.subscribe((ribMesto)=>{
-    })
   }
   getBackgroundStyle(imageUrl: string) {
     return {

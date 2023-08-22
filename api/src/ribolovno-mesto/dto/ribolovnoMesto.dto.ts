@@ -3,7 +3,6 @@ import { RibolovnoMestoEntity } from "../models/ribolovnoMesto.entity";
 import { isStringObject } from "util/types";
 
 export class RibolovnoMestoDto {
-    id: number;
     Naziv: string;
     TipRibe: string;
     PostojanjePlatforme: boolean;
@@ -15,7 +14,6 @@ export class RibolovnoMestoDto {
     userId: number;
 
     constructor(ribolovnoMesto: RibolovnoMestoEntity) {
-        this.id = ribolovnoMesto.id;
         this.Naziv = ribolovnoMesto.Naziv;
         this.TipRibe = ribolovnoMesto.TipRibe;
         this.PostojanjePlatforme = ribolovnoMesto.PostojanjePlatforme;

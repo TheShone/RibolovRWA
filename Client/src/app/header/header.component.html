@@ -6,7 +6,7 @@
       <ul>
         <li><a routerLink="/" class="nav-link px-2 link-secondary"><a class="nav-link scrollto active">Home</a></a></li>
         <li><a class="nav-link scrollto" routerLink="/ribolovnaMesta">Ribolovna mesta</a></li>
-        <li><a class="nav-link scrollto"><a href="#" class="nav-link px-2" *ngIf="authenticated">Moja ribolovna mesta</a></a></li>
+        <li><a class="nav-link scrollto" routerLink="/mojaRibolovnaMesta" *ngIf="authenticated">Moja ribolovna mesta</a></li>
         <li><a class="nav-link scrollto"><a href="#" class="nav-link px-2" *ngIf="authenticated">Profil</a></a></li>
       </ul>
       <i class="bi bi-list mobile-nav-toggle"></i>

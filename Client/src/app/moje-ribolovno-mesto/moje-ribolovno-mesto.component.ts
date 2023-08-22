@@ -1,35 +1,44 @@
-import { AuthService } from './../services/authService.service';
 import { Component, OnInit } from '@angular/core';
-import { Observable, map } from 'rxjs';
+import { Observable } from 'rxjs';
 import { RibolovnoMestoModel } from '../store/types/ribolovnoMesto.module';
-import { RibolovnoMestoState } from '../store/types/ribMesto.interface';
-import { Store } from '@ngrx/store';
-import { errorSelector, isLoadingSelector, ribolovnoMestoSelector } from '../store/selectors/ribMesto.selectors';
-import { ActivatedRoute } from '@angular/router';
-import * as RibolovnoMestoAction from '../store/actions/ribMesto.actions'
-import { DatePipe } from '@angular/common';
 import { KomentarModel } from '../store/types/komentar.module';
-import { KomentariState } from '../store/types/komentari.interface';
-import { isLoadingSelectorr, selectErrorr, selectKomentare } from '../store/selectors/komentari.selectors';
-import * as KomentariActions from '../store/actions/komentari.actions'
-import { Collection } from 'ngx-pagination';
 import { UserModel } from '../store/types/user.module';
+import { Store } from '@ngrx/store';
+import { RibolovnoMestoState } from '../store/types/ribMesto.interface';
+import { ActivatedRoute } from '@angular/router';
+import { DatePipe } from '@angular/common';
+import { KomentariState } from '../store/types/komentari.interface';
+import { AuthService } from '../services/authService.service';
+import { errorSelector, isLoadingSelector, ribolovnoMestoSelector } from '../store/selectors/ribMesto.selectors';
+import { isLoadingSelectorr, selectErrorr, selectKomentare } from '../store/selectors/komentari.selectors';
+import * as RibolovnoMestoAction from '../store/actions/ribMesto.actions'
+import * as KomentariActions from '../store/actions/komentari.actions'
+import { FormGroup } from '@angular/forms';
+
 @Component({
-  selector: 'app-ribolovno-mesto',
-  templateUrl: './ribolovno-mesto.component.html',
-  styleUrls: ['./ribolovno-mesto.component.css']
+  selector: 'app-moje-ribolovno-mesto',
+  templateUrl: './moje-ribolovno-mesto.component.html',
+  styleUrls: ['./moje-ribolovno-mesto.component.css']
 })
-export class RibolovnoMestoComponent implements OnInit{
+export class MojeRibolovnoMestoComponent implements OnInit {
+  form!: FormGroup
   isLoading$ : Observable<boolean>;
   error$ : Observable<String | null>;
   ribMesto$: Observable<RibolovnoMestoModel | null>;
   isLoadingg$: Observable<boolean>
   errorr$: Observable<String|null>
   komentari$: Observable<KomentarModel[]>
-  dodajKomentar: boolean=false;
+  updateRib: boolean=false;
   user!: UserModel;
   ocena: number = 0
   kom: string = ''
+  naziv: string = '';
+  tipRibe: string = '';
+  platforma: boolean= false;
+  osvetljenost: boolean= false;
+  latitude: number= 0;
+  longitude: number=0;
+  id:number =0;
   constructor(private store: Store<RibolovnoMestoState>, private route:ActivatedRoute,private datePipe: DatePipe, private storee: Store<KomentariState>, private authService: AuthService)
   {
     this.isLoading$=this.store.select(isLoadingSelector)
@@ -74,30 +83,13 @@ export class RibolovnoMestoComponent implements OnInit{
   formatDatumPostavljanjaa(date: Date): string | null {
     return this.datePipe.transform(date, 'yyyy-MM-dd');
   }
-  dodajKomentarClick(){
-    if(this.user)
-      this.dodajKomentar=!this.dodajKomentar;
-    else
-      alert("Niste ulogovani")
+  updateRibolovno(){
+    this.updateRib=!this.updateRib;
   }
-  Handle(event: number)
-  {
-    this.ocena=event
+  deleteRibolovno(){
+
   }
-  saveKomentarClick(){
-    if (this.user!==null) {
-      this.ribMesto$.subscribe(ribMesto => {
-        if (ribMesto) {
-          const comment = new KomentarModel(this.kom, this.ocena, new Date(), this.user, ribMesto);
-          this.store.dispatch(KomentariActions.createComment({komentar: comment}))
-          this.dodajKomentar=false;
-        } else {
-          console.error("Ribolovno mesto nije pronađeno.");
-        }
-      });
-    } else {
-      alert("Niste ulogovani");
-    }  
+  updateRibMesto(){
+
   }
-  
 }

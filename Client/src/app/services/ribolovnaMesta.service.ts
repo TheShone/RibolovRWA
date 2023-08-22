@@ -19,8 +19,25 @@ export class RibolovnaMestaService {
 
   getRibolovnoMestoId(id:number): Observable<RibolovnoMestoModel>
   {
-    console.log("pokrecem se")
     return this.http.get<RibolovnoMestoModel>(`http://localhost:3000/ribolovno-Mesto/getRibolovnoMesto/${id}`,{withCredentials:true})
   }
-
+  getMojaRibolovnaMesta(id: number): Observable<RibolovnoMestoModel[]>
+  {
+    return this.http.get<RibolovnoMestoModel[]>(`http://localhost:3000/ribolovno-Mesto/getRibolovnaMestaPoKorisniku/${id}`,{withCredentials:true})
+  }
+  postRibolovnoMesto(ribolovnoMesto: RibolovnoMestoModel): Observable<RibolovnoMestoModel>
+  {
+    const ribolovnoData = {
+      Naziv: ribolovnoMesto.Naziv,
+      TipRibe: ribolovnoMesto.TipRibe,
+      PostojanjePlatforme: ribolovnoMesto.PostojanjePlatforme,
+      Osvetljenost: ribolovnoMesto.Osvetljenost,
+      Latitude: ribolovnoMesto.Latitude,
+      Longitude: ribolovnoMesto.Longitude,
+      datumPostavljanja: ribolovnoMesto.datumPostavljanja,
+      slika:ribolovnoMesto.slika,
+      userId:ribolovnoMesto.user.id
+    }
+    return this.http.post<RibolovnoMestoModel>(`http://localhost:3000/ribolovno-Mesto/addRibolovnoMesto`,ribolovnoData,{withCredentials:true})
+  }
 }

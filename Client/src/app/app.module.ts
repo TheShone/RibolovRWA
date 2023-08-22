@@ -34,6 +34,10 @@ import { reducers4 } from './store/reducers/komentari.reducers';
 import { KomentariEffects } from './store/effects/komentari.effects';
 import {NgxPaginationModule} from 'ngx-pagination';
 import { FormsModule } from '@angular/forms';
+import { MojaRibolovnaMestaComponent } from './moja-ribolovna-mesta/moja-ribolovna-mesta.component';
+import { MojaRibMestaEffects } from './store/effects/mojaRibMesta.effects';
+import { reducers5 } from './store/reducers/mojaRibMesta.reducers';
+import { MojeRibolovnoMestoComponent } from './moje-ribolovno-mesto/moje-ribolovno-mesto.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +49,9 @@ import { FormsModule } from '@angular/forms';
     FooterComponent,
     RibolovnaMestaComponent,
     RibolovnoMestoComponent,
-    RatingComponent
+    RatingComponent,
+    MojaRibolovnaMestaComponent,
+    MojeRibolovnoMestoComponent
   ],
   providers: [DatePipe],
   imports: [
@@ -61,9 +67,9 @@ import { FormsModule } from '@angular/forms';
     HttpClientModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFirestoreModule,
-    StoreModule.forRoot({user:reducers,ribMesta:reducers2,ribMesto:reducers3, komentari:reducers4}, {}),
+    StoreModule.forRoot({user:reducers,ribMesta:reducers2,ribMesto:reducers3, komentari:reducers4, mojaRibMesta:reducers5}, {}),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() }),
-    EffectsModule.forRoot([UserEffects,RibolovnaMestaEffects,RibolovnoMestoEffects,KomentariEffects])
+    EffectsModule.forRoot([UserEffects,RibolovnaMestaEffects,RibolovnoMestoEffects,KomentariEffects,MojaRibMestaEffects])
   ],
   bootstrap: [AppComponent]
 })

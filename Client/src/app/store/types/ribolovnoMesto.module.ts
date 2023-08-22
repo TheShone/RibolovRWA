@@ -26,3 +26,16 @@ export class RibolovnoMestoModel implements RibolovnoMesto {
         public user: UserModel
     ) {}
 }
+export class RibolovnoMestoModelAdd {
+    constructor(
+        public Naziv: string,
+        public TipRibe: string,
+        public PostojanjePlatforme: boolean,
+        public Osvetljenost: boolean,
+        public Latitude: number,
+        public Longitude: number,
+        public datumPostavljanja: Date,
+        public slika: string,
+        public user: UserModel
+    ) {}
+}

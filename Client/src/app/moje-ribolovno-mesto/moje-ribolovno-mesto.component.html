@@ -24,36 +24,63 @@
                   <h4 class="price">Datum Postavljanja: <span>{{ formatDatumPostavljanja((ribMesto$ | async)?.datumPostavljanja) }}</span></h4>
                   <h4 class="price">Oglašavač: <span>{{ (ribMesto$ | async)?.user?.username }}</span></h4>
                   <div class="action">
-                  <button class="add-to-cart btn btn-default" type="button" (click)="dodajKomentarClick()">Dodaj komentar</button>
+                    <button class="add-to-cart btn btn-default" type="button" (click)="updateRibolovno()">Update</button>
+                    <button class="add-to-cart btn btn-default" type="button" (click)="deleteRibolovno()">Delete</button>
+                  </div>
                 </div>
-                </div>
-                <ng-container *ngIf="dodajKomentar">
-                    <div class="row d-flex justify-content-center">
-                      <div class="col-md-10 col-lg-8 col-xl-6">
-                        <div class="card">
-                          <div class="card-body p-4">
-                            <div class="d-flex flex-start w-100">
-                              <img class="rounded-circle shadow-1-strong me-3"
-                                [src]='user.slika' alt="avatar" width="65"
-                                height="65" />
-                              <div class="w-100">
-                                <h5>Dodaj komentar</h5>
-                                <app-rating [locked]="false" (onRaiting)="Handle($event)"></app-rating>
-                                <div class="form-outline">
-                                  <textarea class="form-control" id="textAreaExample" rows="4" [(ngModel)]="kom"></textarea>
-                                  <label class="form-label" for="textAreaExample">Kakvo je vaše iskustvo?</label>
-                                </div>
-                                <div class="d-flex justify-content-between mt-3">
-                                  <button type="button" class="btn btn-danger" (click)="saveKomentarClick()">
-                                    Send <i class="fas fa-long-arrow-alt-right ms-1"></i>
-                                  </button>
-                                </div>
-                              </div>
-                            </div>
+                <ng-container *ngIf="updateRib">
+                  <div class="row d-flex justify-content-center">
+                    <form [formGroup]="form" (submit)="updateRibMesto()">
+                      <div class="form-group row">
+                        <label for="text" class="col-4 col-form-label" >Naziv:</label> 
+                        <div class="col-8">
+                          <div class="input-group"> 
+                            <input id="text" name="text" type="text" class="form-control" formControlName="naziv" [(ngModel)]="naziv">
                           </div>
                         </div>
                       </div>
-                    </div>
+                      <div class="form-group row">
+                        <label for="select" class="col-4 col-form-label">Tip ribe:</label> 
+                        <div class="col-8">
+                          <select id="select" name="select" class="custom-select" formControlName="tipRibe" [(ngModel)]="tipRibe">
+                            <option value="Pastrmka">Pastrmka</option>
+                            <option value="Som">Som</option>
+                            <option value="Smudj">Smudj</option>
+                          </select>
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <label class="col-4">Poseduje</label> 
+                        <div class="col-8">
+                          <div class="custom-control custom-checkbox custom-control-inline">
+                            <input name="checkbox" id="checkbox_0" type="checkbox" checked="checked" class="custom-control-input" value="rabbit" formControlName="platforma" [(ngModel)]="platforma"> 
+                            <label for="checkbox_0" class="custom-control-label">Platforma</label>
+                          </div>
+                          <div class="custom-control custom-checkbox custom-control-inline">
+                            <input name="checkbox" id="checkbox_1" type="checkbox" class="custom-control-input" value="duck" checked="checked" formControlName="osvetljenost" [(ngModel)]="osvetljenost"> 
+                            <label for="checkbox_1" class="custom-control-label">Osvetljenost</label>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <label for="text1" class="col-4 col-form-label">Latitude:</label> 
+                        <div class="col-8">
+                          <input id="text1" name="text1" type="number" class="form-control" formControlName="latitude" [(ngModel)]="latitude">
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <label for="text2" class="col-4 col-form-label">Longitude:</label> 
+                        <div class="col-8">
+                          <input id="text2" name="text2" type="number" class="form-control" formControlName="longitude" [(ngModel)]="longitude">
+                        </div>
+                      </div>  
+                      <div class="form-group row">
+                        <div class="offset-4 col-8">
+                          <button name="submit" type="submit" class="btn btn-primary">Dodaj</button>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
                 </ng-container>
                 <section>
                   <div>
