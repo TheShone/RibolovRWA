@@ -1,4 +1,5 @@
 export interface User{
+    id?:number,
     ime?:string;
     prezime?:string;
     username?:string;
@@ -9,6 +10,7 @@ export interface User{
     slika?:string;
 }
 export class UserModel implements User {
+    id?: number;
     ime?: string;
     prezime?: string;
     username?: string;
@@ -19,6 +21,7 @@ export class UserModel implements User {
     slika?: string;
   
     constructor(
+      id?: number,
       ime?: string,
       prezime?: string,
       username?: string,
@@ -27,6 +30,7 @@ export class UserModel implements User {
       datumRodjenja?: Date,
       slika?: string
     ) {
+      this.id=id;
       this.ime = ime;
       this.prezime = prezime;
       this.username = username;

@@ -12,5 +12,15 @@ import { Observable } from 'rxjs';
     {
         return this.http.get<KomentarModel[]>(`http://localhost:3000/komentar/getKomentareZaRibolovnoMesto/${id}`,{withCredentials:true})
     }
+    postKomentar(komentar: KomentarModel): Observable<KomentarModel>
+    {
+      const komentarData = {
+        Opis: komentar.Opis,
+        Ocena: komentar.Ocena,
+        idRibolovnogMesta: komentar.ribolovnoMesto.id,
+        idUsera: komentar.user.id
+      };
+      return this.http.post<KomentarModel>('http://localhost:3000/komentar/addKomentar',komentarData,{withCredentials:true})
+    }
   }
   

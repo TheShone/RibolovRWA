@@ -32,6 +32,8 @@ import { RatingComponent } from './utilities/rating/rating.component'
 import { DatePipe } from '@angular/common';
 import { reducers4 } from './store/reducers/komentari.reducers';
 import { KomentariEffects } from './store/effects/komentari.effects';
+import {NgxPaginationModule} from 'ngx-pagination';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -54,6 +56,8 @@ import { KomentariEffects } from './store/effects/komentari.effects';
     MatToolbarModule,
     MatIconModule,
     MatButtonModule,
+    FormsModule,
+    NgxPaginationModule,
     HttpClientModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFirestoreModule,

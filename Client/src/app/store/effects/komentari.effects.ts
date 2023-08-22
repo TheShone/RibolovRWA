@@ -18,6 +18,18 @@ export class KomentariEffects{
         })
     )
    )
+   postKomentar$=createEffect(()=>
+   this.actions$.pipe(
+    ofType(KomentarAction.createComment),
+    mergeMap((action)=>{
+        return this.komentariService.postKomentar(action.komentar).pipe(
+            map((komentar)=>KomentarAction.createCommentSuccess({komentar})),
+            catchError((error)=>
+            of(KomentarAction.createPostFailure({error:error.message}))
+            )
+        )
+    })
+   ))
    constructor(private actions$: Actions, private komentariService:KomentariService){
 
    }
