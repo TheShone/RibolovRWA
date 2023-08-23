@@ -3,6 +3,9 @@ import { Actions, createEffect, ofType } from "@ngrx/effects"
 import { RibolovnaMestaService } from "src/app/services/ribolovnaMesta.service"
 import * as MojaRibolovnaMestaActions from '../actions/mojaRibMesta.actions'
 import { catchError, map, mergeMap, of } from "rxjs"
+import { RibolovnoMestoModel } from "../types/ribolovnoMesto.module"
+import { Update } from "@ngrx/entity";
+
 @Injectable()
 export class MojaRibMestaEffects{
 
@@ -24,6 +27,16 @@ export class MojaRibMestaEffects{
             catchError((error)=>
             of(MojaRibolovnaMestaActions.addRibolovnoMestoFailure({error: error.message})))
         ))
+    )
+    )
+
+    deleteRibolovnoMesto$ = createEffect(()=>
+    this.actions$.pipe(
+      ofType(MojaRibolovnaMestaActions.deleteRibolovnoMesto),
+      mergeMap((action)=>
+      this.ribolovnaMestaService.deleteRibolovnoMesto(action.id).pipe(
+        map((ribMesto)=>MojaRibolovnaMestaActions.deleteRibolovnoMestoSuccess({id: action.id}))
+      ))
     )
     )
     constructor(private actions$: Actions,private ribolovnaMestaService: RibolovnaMestaService)

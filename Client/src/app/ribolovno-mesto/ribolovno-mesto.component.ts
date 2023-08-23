@@ -27,9 +27,25 @@ export class RibolovnoMestoComponent implements OnInit{
   errorr$: Observable<String|null>
   komentari$: Observable<KomentarModel[]>
   dodajKomentar: boolean=false;
+  latitude!: number;
+  longitude!: number;
   user!: UserModel;
   ocena: number = 0
   kom: string = ''
+  display: any;
+  zoom = 12;
+  maxZoom = 15;
+  minZoom = 8;
+  markers = []  as  any;
+  center!: google.maps.LatLngLiteral;
+  options: google.maps.MapOptions = {
+    zoomControl: false,
+    scrollwheel: false,
+    disableDoubleClickZoom: true,
+    mapTypeId: 'hybrid',
+    maxZoom:this.maxZoom,
+    minZoom:this.minZoom,
+  }
   constructor(private store: Store<RibolovnoMestoState>, private route:ActivatedRoute,private datePipe: DatePipe, private storee: Store<KomentariState>, private authService: AuthService)
   {
     this.isLoading$=this.store.select(isLoadingSelector)
@@ -38,12 +54,44 @@ export class RibolovnoMestoComponent implements OnInit{
     this.isLoadingg$=this.storee.select(isLoadingSelectorr)
     this.errorr$=this.storee.select(selectErrorr)
     this.komentari$=this.storee.select(selectKomentare)
+    this.ribMesto$.subscribe((ribMesto)=>{
+      if(ribMesto!=undefined)
+      {
+      this.latitude=ribMesto.Latitude
+      this.longitude=ribMesto.Longitude
+      }
+    })
+  }
+  addMarker() {
+    this.markers.push({
+      position: {
+        lat: +this.latitude,
+        lng: +this.longitude,
+      },
+      label: {
+        color: 'red',
+        text: 'Marker label ' + (this.markers.length + 1),
+      },
+      title: 'Marker title ' + (this.markers.length + 1),
+      options: { animation: google.maps.Animation.BOUNCE },
+    });
   }
   ngOnInit(): void {
     this.route.params.subscribe(params => {
       const id = params['id'];
       this.store.dispatch(RibolovnoMestoAction.getRibMesto({id}))
       this.storee.dispatch(KomentariActions.getKomentare({id}))
+      this.ribMesto$.subscribe(ribMesto => {
+        if (ribMesto) {
+          console.log(ribMesto.Latitude + " "+ ribMesto.Longitude)
+          this.center={
+            lat: +this.latitude,
+            lng: +this.longitude
+          };
+          this.zoom = 12;
+          this.addMarker();
+        }
+      });
     })
     const userJson=localStorage.getItem('loggedUser');
     if(userJson!= null)
@@ -83,6 +131,12 @@ export class RibolovnoMestoComponent implements OnInit{
   Handle(event: number)
   {
     this.ocena=event
+  }
+  moveMap(event: google.maps.MapMouseEvent) {
+    if (event.latLng != null) this.center = (event.latLng.toJSON());
+  }
+  move(event: google.maps.MapMouseEvent) {
+    if (event.latLng != null) this.display = event.latLng.toJSON();
   }
   saveKomentarClick(){
     if (this.user!==null) {

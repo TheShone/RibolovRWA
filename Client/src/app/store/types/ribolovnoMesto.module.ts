@@ -1,7 +1,7 @@
 import { UserModel } from "./user.module";
 
 export interface RibolovnoMesto{
-    id:string;
+    id:number;
     Naziv: string;
     TipRibe: string;
     PostojanjePlatforme: boolean;
@@ -14,7 +14,7 @@ export interface RibolovnoMesto{
 }
 export class RibolovnoMestoModel implements RibolovnoMesto {
     constructor(
-        public id:string,
+        public id:number,
         public Naziv: string,
         public TipRibe: string,
         public PostojanjePlatforme: boolean,

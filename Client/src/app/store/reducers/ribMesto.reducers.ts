@@ -13,5 +13,8 @@ export const initialState: RibolovnoMestoState=adapter.getInitialState({
 export const reducers3=createReducer(initialState,
     on(ribolovnoMestoActions.getRibMesto,(state)=>({...state,isLoading:true})),
     on(ribolovnoMestoActions.getRibMestoSuccess,(state,action)=>({...state,isLoading:false,ribolovnoMesto:action.ribMesto})),
-    on(ribolovnoMestoActions.getRibMestoFailure,(state,action)=>({...state,error:action.error}))
+    on(ribolovnoMestoActions.getRibMestoFailure,(state,action)=>({...state,error:action.error})),
+    on(ribolovnoMestoActions.updateRibolovnoMesto,(state)=>({...state,isLoading:true})),
+    on(ribolovnoMestoActions.updateRibolovnoMestoSuccess,(state,action)=>({...state,isLoading:false,ribolovnoMesto: action.ribMesto})),
+    on(ribolovnoMestoActions.updateRibolovnoMestoFailure,(state,action)=>({...state,error:action.error})),
 )

@@ -1,5 +1,7 @@
 import { createAction, props } from "@ngrx/store";
 import { RibolovnoMestoModel } from "../types/ribolovnoMesto.module";
+import { Update } from "@ngrx/entity";
+import { Action } from "rxjs/internal/scheduler/Action";
 
 export const getMojaRibolovnaMesta = createAction(
     '[Moja Ribolovna Mesta Page] Get Moja Ribolovna Mesta]',
@@ -24,4 +26,12 @@ export const addRibolovnoMestoSuccess = createAction(
 export const addRibolovnoMestoFailure = createAction(
     '[Moja Ribolovna Mesta Page] Add Ribolovno Msto Failure',
     props<{error:string}>()
+)
+export const deleteRibolovnoMesto = createAction(
+    '[Moja Ribolovna Mesta Page], Delete Ribolovno Mesto',
+    props<{id:number}>()
+)
+export const deleteRibolovnoMestoSuccess = createAction(
+    '[Moja Ribolovna Mesta Page], Delete Ribolovno Mesto Success',
+    props<{id:number}>()
 )

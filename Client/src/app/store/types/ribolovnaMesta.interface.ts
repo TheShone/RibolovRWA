@@ -5,4 +5,5 @@ import { RibolovnoMestoModel } from "./ribolovnoMesto.module";
 export interface RibolovnaMestaState extends EntityState<RibolovnoMestoModel>{
     isLoading:boolean;
     error: string | null;
+    update:boolean
 }

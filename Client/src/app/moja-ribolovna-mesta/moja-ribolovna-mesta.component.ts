@@ -88,7 +88,7 @@ export class MojaRibolovnaMestaComponent implements OnInit {
             this.imageUrl = url;
             if(this.imageUrl!==null)
             { 
-              const ribMesto = new RibolovnoMestoModel("asd",this.naziv,this.tipRibe,this.platforma,this.osvetljenost,this.latitude
+              const ribMesto = new RibolovnoMestoModel(55,this.naziv,this.tipRibe,this.platforma,this.osvetljenost,this.latitude
               ,this.longitude,new Date(),this.imageUrl,this.user)
               this.store.dispatch(MojaRibolovnaMestaActions.addRibolovnoMesto({ribMesto}))
             }

@@ -1,6 +1,9 @@
 <div id="glavni">
     <ng-container *ngIf="isLoading$ | async; else artPiecesTemplate" class="ng-container">
-        <div class="loading-text">Loading...</div>
+      <button class="btn btn-primary" type="button" disabled>
+        <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
+        Loading...
+      </button>
       </ng-container>
       <ng-template #artPiecesTemplate>
         <div class="container">
@@ -27,6 +30,22 @@
                   <button class="add-to-cart btn btn-default" type="button" (click)="dodajKomentarClick()">Dodaj komentar</button>
                 </div>
                 </div>
+                <google-map height="500px"
+                  width="100%"
+                  [center]="center"
+                  [zoom]="zoom"
+                  (mapClick)="moveMap($event)"
+                  (mapMousemove)="move($event)">
+                  <map-marker
+                    #markerElem="mapMarker"
+                    *ngFor="let marker of markers"
+                    [position]="marker.position"
+                    [label]="marker.label"
+                    [title]="marker.title"
+                    [options]="marker.options"
+                  >
+                  </map-marker>
+                </google-map>
                 <ng-container *ngIf="dodajKomentar">
                     <div class="row d-flex justify-content-center">
                       <div class="col-md-10 col-lg-8 col-xl-6">

@@ -12,4 +12,16 @@ export const getRibMestoSuccess=createAction(
 export const getRibMestoFailure=createAction(
     '[RibolovnoMesto page] Get Ribolovno Mesto Failure',
     props<{error:string}>()
-) 
+)
+export const updateRibolovnoMesto = createAction(
+    '[Moja Ribolovna Mesta Page] Update Ribolovno Mesto',
+    props<{ribMesto:RibolovnoMestoModel}>()
+)
+export const updateRibolovnoMestoSuccess = createAction(
+    '[Moja Ribolovna Mesta Page], Update Ribolovno Mesto Success',
+    props<{ribMesto:RibolovnoMestoModel}>()
+)
+export const updateRibolovnoMestoFailure = createAction(
+    '[Moja Ribolovna Mesta Page], Update Ribolovno Mesto Failure',
+    props<{error:string}>()
+)

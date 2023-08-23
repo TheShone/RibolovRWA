@@ -59,7 +59,10 @@
     </div>
   </div>
     <ng-container *ngIf="isLoading$ | async; else artPiecesTemplate" class="ng-container">
-      <div class="loading-text">Loading...</div>
+      <button class="btn btn-primary" type="button" disabled>
+        <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
+        Loading...
+      </button>
     </ng-container>
     <ng-template #artPiecesTemplate>
       <ng-container *ngFor="let mesto of ribMesta$ | async" class="ng-container" >

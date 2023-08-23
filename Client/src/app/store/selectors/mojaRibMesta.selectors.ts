@@ -11,11 +11,12 @@ export const mojaRibMestaSelector = createSelector(
     mojaRibMestaFeature,
     adapter.getSelectors().selectAll
 )
-export const validRibMestaSelector = createSelector(
-    mojaRibMestaSelector,
-    (ribMesta) => ribMesta.filter((ribMesto) => ribMesto.id !== 'asd')
-  );
+
 export const errorSelector = createSelector(
     mojaRibMestaFeature,
     (state:MojaRibolovnaMestaState)=>state.error
+)
+export const updateSelector = createSelector(
+    mojaRibMestaFeature,
+    (state:MojaRibolovnaMestaState)=>state.update
 )

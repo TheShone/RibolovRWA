@@ -41,7 +41,8 @@ export class RibolovnoMestoService {
         ribMesto.PostojanjePlatforme=ribolovno.PostojanjePlatforme
         ribMesto.TipRibe=ribolovno.TipRibe
         ribMesto.slika=ribolovno.slika
-        return this.ribolovnoMestoRepository.update(ribMesto.id,ribMesto)
+        this.ribolovnoMestoRepository.update(ribMesto.id,ribMesto)
+        return ribMesto
     }
     async getRibolovnaMesta()
     {

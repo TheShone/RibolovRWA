@@ -18,5 +18,18 @@ export class RibolovnoMestoEffects{
         })
     )
     )
+    putRibolovnoMesto$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(RibolovnoMestoActions.updateRibolovnoMesto),
+      mergeMap((action) =>
+        this.ribolovnaMestaService.updateRibolovnoMesto(action.ribMesto).pipe(
+          map((ribMesto) => RibolovnoMestoActions.updateRibolovnoMestoSuccess({ribMesto})),
+          catchError((error) =>
+            of(RibolovnoMestoActions.updateRibolovnoMestoFailure({ error: error.message }))
+          )
+        )
+      )
+    )
+      );
     constructor(private actions$: Actions,private ribolovnaMestaService: RibolovnaMestaService,private router: Router){}
 }

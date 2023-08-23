@@ -8,6 +8,7 @@ export const adapter:EntityAdapter<RibolovnoMestoModel>=createEntityAdapter<Ribo
 export const initialState:RibolovnaMestaState=adapter.getInitialState({
     isLoading:false,
     error: null,
+    update:false
 })
 
 export const reducers2=createReducer(initialState,

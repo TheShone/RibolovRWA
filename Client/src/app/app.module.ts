@@ -38,7 +38,7 @@ import { MojaRibolovnaMestaComponent } from './moja-ribolovna-mesta/moja-ribolov
 import { MojaRibMestaEffects } from './store/effects/mojaRibMesta.effects';
 import { reducers5 } from './store/reducers/mojaRibMesta.reducers';
 import { MojeRibolovnoMestoComponent } from './moje-ribolovno-mesto/moje-ribolovno-mesto.component';
-
+import { GoogleMapsModule } from '@angular/google-maps'
 @NgModule({
   declarations: [
     AppComponent,
@@ -64,6 +64,7 @@ import { MojeRibolovnoMestoComponent } from './moje-ribolovno-mesto/moje-ribolov
     MatButtonModule,
     FormsModule,
     NgxPaginationModule,
+    GoogleMapsModule,
     HttpClientModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFirestoreModule,
