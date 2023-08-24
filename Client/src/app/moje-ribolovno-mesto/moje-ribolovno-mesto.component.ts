@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Observable, finalize } from 'rxjs';
 import { RibolovnoMestoModel } from '../store/types/ribolovnoMesto.module';
 import { KomentarModel } from '../store/types/komentar.module';
@@ -25,6 +25,8 @@ import { updateSelector } from '../store/selectors/mojaRibMesta.selectors';
   styleUrls: ['./moje-ribolovno-mesto.component.css']
 })
 export class MojeRibolovnoMestoComponent implements OnInit {
+  @Input() ribolovnoMestoId: number | undefined;
+  @Output() ribolovnoMestoDeleted: EventEmitter<number> = new EventEmitter<number>();
   form!: FormGroup
   isLoading$ : Observable<boolean>;
   error$ : Observable<String | null>;
@@ -38,6 +40,7 @@ export class MojeRibolovnoMestoComponent implements OnInit {
   kom: string = ''
   naziv: string = '';
   tipRibe: string = '';
+  filePath :string = '';
   platforma: boolean= false;
   osvetljenost: boolean= false;
   latitude: number= 0;
@@ -104,10 +107,10 @@ export class MojeRibolovnoMestoComponent implements OnInit {
         osvetljenost: new FormControl(''),
         latitude: new FormControl('',Validators.required),
         longitude: new FormControl('',Validators.email),
+        slika: new FormControl('')
       })
       this.ribMesto$.subscribe(ribMesto => {
         if (ribMesto) {
-          console.log(ribMesto.Latitude + " "+ ribMesto.Longitude)
           this.center={
             lat: +this.latitudee,
             lng: +this.longitudee
@@ -159,6 +162,9 @@ export class MojeRibolovnoMestoComponent implements OnInit {
       {
         this.id = ribMesto.id,
         this.naziv=ribMesto.Naziv
+        this.form.patchValue({
+          tipRibe: ribMesto.TipRibe
+        })
         this.tipRibe=ribMesto.TipRibe
         this.platforma=ribMesto.PostojanjePlatforme,
         this.osvetljenost=ribMesto.Osvetljenost,
@@ -169,36 +175,45 @@ export class MojeRibolovnoMestoComponent implements OnInit {
     })
 
   }
+  
   deleteRibolovno(){
     this.route.params.subscribe(params => {
       const id = params['id'];
     if(confirm("Jeste li sigurni da zelite da obrisete ovo ribolovno mesto")){
-      console.log(this.id);
         this.storeee.dispatch(MojaRibolovnaMestaActions.deleteRibolovnoMesto({id:id}))
         this.router.navigate(['/mojaRibolovnaMesta']);
     }
   })
   }
   updateRibMesto(){
-
-    const filePath = `profile_images/${Date.now()}_${this.selectedFile!.name}`;
-    const fileRef = this.storage.ref(filePath);
-    const task = this.storage.upload(filePath, this.selectedFile);
+    if(this.selectedFile)
+    {
+     this.filePath = `profile_images/${Date.now()}_${this.selectedFile!.name}`;
+     const fileRef = this.storage.ref(this.filePath);
+    const task = this.storage.upload(this.filePath, this.selectedFile);
     task.snapshotChanges().pipe(
       finalize(() => {
         fileRef.getDownloadURL().subscribe(async (url) => {
           this.imageUrl = url;
           if(this.imageUrl!==null)
-          { 
+          {
             const ribMesto = new RibolovnoMestoModel(this.id,this.naziv,this.tipRibe,this.platforma,this.osvetljenost,this.latitude,this.longitude,
             this.datumPostavljanja,this.imageUrl,this.user)
             console.log(ribMesto)
             this.store.dispatch(RibolovnoMestoAction.updateRibolovnoMesto({ribMesto}))
             this.updateRib=!this.updateRib;
+            
           }
+
         });
       })
     ).subscribe();
+    }
+    else
+    {
+      alert("Unesi sliku")
+    }
+
   }
   onFileChange(event: any) {
     this.selectedFile = event.target.files[0];

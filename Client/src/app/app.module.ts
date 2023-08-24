@@ -38,7 +38,10 @@ import { MojaRibolovnaMestaComponent } from './moja-ribolovna-mesta/moja-ribolov
 import { MojaRibMestaEffects } from './store/effects/mojaRibMesta.effects';
 import { reducers5 } from './store/reducers/mojaRibMesta.reducers';
 import { MojeRibolovnoMestoComponent } from './moje-ribolovno-mesto/moje-ribolovno-mesto.component';
-import { GoogleMapsModule } from '@angular/google-maps'
+import { GoogleMapsModule } from '@angular/google-maps';
+import { ProfilComponent } from './profil/profil.component'
+import { reducers6 } from './store/reducers/profil.reducers';
+import { ProfilEffects } from './store/effects/profile.effects';
 @NgModule({
   declarations: [
     AppComponent,
@@ -51,7 +54,8 @@ import { GoogleMapsModule } from '@angular/google-maps'
     RibolovnoMestoComponent,
     RatingComponent,
     MojaRibolovnaMestaComponent,
-    MojeRibolovnoMestoComponent
+    MojeRibolovnoMestoComponent,
+    ProfilComponent
   ],
   providers: [DatePipe],
   imports: [
@@ -68,9 +72,10 @@ import { GoogleMapsModule } from '@angular/google-maps'
     HttpClientModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFirestoreModule,
-    StoreModule.forRoot({user:reducers,ribMesta:reducers2,ribMesto:reducers3, komentari:reducers4, mojaRibMesta:reducers5}, {}),
+    StoreModule.forRoot({user:reducers,ribMesta:reducers2,ribMesto:reducers3, komentari:reducers4, mojaRibMesta:reducers5,
+    profil:reducers6}, {}),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() }),
-    EffectsModule.forRoot([UserEffects,RibolovnaMestaEffects,RibolovnoMestoEffects,KomentariEffects,MojaRibMestaEffects])
+    EffectsModule.forRoot([UserEffects,RibolovnaMestaEffects,RibolovnoMestoEffects,KomentariEffects,MojaRibMestaEffects,ProfilEffects])
   ],
   bootstrap: [AppComponent]
 })

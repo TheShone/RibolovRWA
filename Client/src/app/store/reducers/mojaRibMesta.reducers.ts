@@ -3,6 +3,7 @@ import { RibolovnoMestoModel } from "../types/ribolovnoMesto.module";
 import { RibolovnaMestaState } from "../types/ribolovnaMesta.interface";
 import { createReducer, on } from "@ngrx/store";
 import * as MojaRibolovnaMestaActions from '../actions/mojaRibMesta.actions'
+import * as RibolovnoMestoAkcije from '../actions/ribMesto.actions'
 import { MojaRibolovnaMestaState } from "../types/mojaRibMesta.interface";
 export const adapter:EntityAdapter<RibolovnoMestoModel>=createEntityAdapter<RibolovnoMestoModel>()
 
@@ -22,6 +23,11 @@ export const reducers5 = createReducer(initialState,
     on(MojaRibolovnaMestaActions.addRibolovnoMestoSuccess,(state,action)=>{
         return adapter.addOne(action.ribMesto,{...state, isLoading:false})
     }),
+    on(RibolovnoMestoAkcije.updateRibolovnoMesto,(state)=>({...state,isLoading:true})),
+    on(RibolovnoMestoAkcije.updateRibolovnoMestoSuccess,(state,actions)=>{
+        return adapter.updateOne({id:actions.ribMesto.id,changes:actions.ribMesto},{...state,isLoading:false})
+    }),
+    on(RibolovnoMestoAkcije.updateRibolovnoMestoFailure,(state,action)=>({...state,error:action.error})),
     on(MojaRibolovnaMestaActions.deleteRibolovnoMesto,(state)=>({...state,isLoading:true})),
     on(MojaRibolovnaMestaActions.deleteRibolovnoMestoSuccess,(state,action)=>{
         return adapter.removeOne(action.id,{...state,isLoading:false})

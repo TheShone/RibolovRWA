@@ -31,6 +31,54 @@
                     <button class="add-to-cart btn btn-default" (click)="deleteRibolovno()">Delete</button>
                   </div>
                 </div>
+                <ng-container *ngIf="updateRib">
+                  <div class="row d-flex justify-content-center">
+                    <form [formGroup]="form" (submit)="updateRibMesto()">
+                      <div class="form-group row">
+                        <label for="text" class="col-4 col-form-label" >Naziv:</label> 
+                        <div class="col-8">
+                          <div class="input-group"> 
+                            <input id="text"  type="text" class="form-control" formControlName="naziv" [(ngModel)]="naziv">
+                          </div>
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <label for="select" class="col-4 col-form-label">Tip ribe ako je menjaš:</label> 
+                        <div class="col-8">
+                          <select id="select"  class="custom-select" formControlName="tipRibe" [(ngModel)]="tipRibe">
+                            <option value="Default" [selected]="true">Izaberi..</option>
+                            <option value="Pastrmka">Pastrmka</option>
+                            <option value="Som">Som</option>
+                            <option value="Smudj">Smudj</option>
+                          </select>
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <label class="col-4">Poseduje</label> 
+                        <div class="col-8">
+                          <div class="custom-control custom-checkbox custom-control-inline">
+                            <input  id="checkbox_0" type="checkbox" checked="checked" class="custom-control-input" value="rabbit" formControlName="platforma" [(ngModel)]="platforma"> 
+                            <label for="checkbox_0" class="custom-control-label">Platforma</label>
+                          </div>
+                          <div class="custom-control custom-checkbox custom-control-inline">
+                            <input  id="checkbox_1" type="checkbox" class="custom-control-input" value="duck" checked="checked" formControlName="osvetljenost" [(ngModel)]="osvetljenost"> 
+                            <label for="checkbox_1" class="custom-control-label">Osvetljenost</label>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <label for="text1" class="col-4 col-form-label">Slika:</label> 
+                        <div class="col-8">
+                          <input type="file" (change)="onFileChange($event)" formControlName="slika" class="form-control form-control-lg" id="slika" />                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <div class="offset-4 col-8">
+                          <button  type="submit" class="btn btn-primary">Update</button>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                </ng-container>
                 <google-map height="500px"
                 width="100%"
                 [center]="center"
@@ -47,54 +95,6 @@
                 >
                 </map-marker>
               </google-map>
-                <ng-container *ngIf="updateRib">
-                  <div class="row d-flex justify-content-center">
-                    <form [formGroup]="form" (submit)="updateRibMesto()">
-                      <div class="form-group row">
-                        <label for="text" class="col-4 col-form-label" >Naziv:</label> 
-                        <div class="col-8">
-                          <div class="input-group"> 
-                            <input id="text" name="text" type="text" class="form-control" formControlName="naziv" [(ngModel)]="naziv">
-                          </div>
-                        </div>
-                      </div>
-                      <div class="form-group row">
-                        <label for="select" class="col-4 col-form-label">Tip ribe:</label> 
-                        <div class="col-8">
-                          <select id="select" name="select" class="custom-select" formControlName="tipRibe" [(ngModel)]="tipRibe">
-                            <option value="Default" [selected]="true">Izaberi..</option>
-                            <option value="Pastrmka">Pastrmka</option>
-                            <option value="Som">Som</option>
-                            <option value="Smudj">Smudj</option>
-                          </select>
-                        </div>
-                      </div>
-                      <div class="form-group row">
-                        <label class="col-4">Poseduje</label> 
-                        <div class="col-8">
-                          <div class="custom-control custom-checkbox custom-control-inline">
-                            <input name="checkbox" id="checkbox_0" type="checkbox" checked="checked" class="custom-control-input" value="rabbit" formControlName="platforma" [(ngModel)]="platforma"> 
-                            <label for="checkbox_0" class="custom-control-label">Platforma</label>
-                          </div>
-                          <div class="custom-control custom-checkbox custom-control-inline">
-                            <input name="checkbox" id="checkbox_1" type="checkbox" class="custom-control-input" value="duck" checked="checked" formControlName="osvetljenost" [(ngModel)]="osvetljenost"> 
-                            <label for="checkbox_1" class="custom-control-label">Osvetljenost</label>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="form-group row">
-                        <label for="text1" class="col-4 col-form-label">Slika:</label> 
-                        <div class="col-8">
-                          <input type="file" (change)="onFileChange($event)" formControlName="slika" class="form-control form-control-lg" id="slika" />                        </div>
-                      </div>
-                      <div class="form-group row">
-                        <div class="offset-4 col-8">
-                          <button name="submit" type="submit" class="btn btn-primary">Dodaj</button>
-                        </div>
-                      </div>
-                    </form>
-                  </div>
-                </ng-container>
                 <section>
                   <div>
                     <div class="row d-flex justify-content-center">

@@ -1,5 +1,5 @@
 export interface User{
-    id?:number,
+    id?:number;
     ime?:string;
     prezime?:string;
     username?:string;

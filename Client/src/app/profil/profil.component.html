@@ -1,0 +1,102 @@
+<div id="glavni">
+    <ng-container *ngIf="isLoading$ | async; else artPiecesTemplate" class="ng-container">
+      <button class="btn btn-primary" type="button" disabled>
+        <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
+        Loading...
+      </button>
+      </ng-container>
+      <ng-template #artPiecesTemplate>
+        <div class="container">
+          <div class="card">
+            <div class="container-fliud">
+              <div class="wrapper row">
+                <div class="preview col-md-6">
+                  
+                  <div class="preview-pic tab-content">
+                    <div class="tab-pane active" id="pic-1"><img [src]="(profil$ | async)?.slika" /></div>
+                  </div>
+                  
+                </div>
+                <div class="details col-md-6">
+                  <h3 class="product-title">{{ (profil$ | async)?.username }}</h3>
+                  <h4 class="price">Ime: <span>{{ (profil$ | async)?.ime }}</span></h4>
+                  <h4 class="price">Prezime: <span>{{ (profil$ | async)?.prezime }}</span></h4>
+                  <h4 class="price">Email: <span>{{ (profil$ | async)?.email }}</span></h4>
+                  <h4 class="price">Datum Rodjenja: <span>{{ formatDatumPostavljanja((profil$ | async)?.datumRodjenja) }}</span></h4>
+                  <div class="action">
+                    <button class="add-to-cart btn btn-default" type="button" (click)="update()">Update</button>
+                  </div>
+                </div>
+                <ng-container *ngIf="updateRib">
+                  <div class="row d-flex justify-content-center">
+                    <form [formGroup]="form" (submit)="updateProfil()">
+                      <div class="form-group row">
+                        <label for="text" class="col-4 col-form-label" >Ime:</label> 
+                        <div class="col-8">
+                          <div class="input-group"> 
+                            <input id="text" name="text" type="text" class="form-control" formControlName="ime">
+                          </div>
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <label for="text" class="col-4 col-form-label" >Prezime:</label> 
+                        <div class="col-8">
+                          <div class="input-group"> 
+                            <input id="prezime" name="prezime" type="text" class="form-control" formControlName="prezime">
+                          </div>
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <label for="text" class="col-4 col-form-label" >Username:</label> 
+                        <div class="col-8">
+                          <div class="input-group"> 
+                            <input id="username" name="text" type="text" class="form-control" formControlName="username">
+                          </div>
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <label for="text" class="col-4 col-form-label" >Email:</label> 
+                        <div class="col-8">
+                          <div class="input-group"> 
+                            <input id="email" name="text" type="email" class="form-control" formControlName="email">
+                          </div>
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <label for="text" class="col-4 col-form-label" >Password:</label> 
+                        <div class="col-8">
+                          <div class="input-group"> 
+                            <input id="password" name="text" type="password" class="form-control" formControlName="password">
+                          </div>
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <label for="text" class="col-4 col-form-label" >Datum Rodjenja:</label> 
+                        <div class="col-8">
+                          <div class="input-group"> 
+                            <input type="date" formControlName="datumRodjenja" class="form-control form-control-lg" id="datumRodjenja"/>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <label for="text1" class="col-4 col-form-label">Slika:</label> 
+                        <div class="col-8">
+                          <input type="file" (change)="onFileChange($event)" formControlName="slika" class="form-control form-control-lg" id="slika" />                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <div class="offset-4 col-8">
+                          <button name="submit" type="submit" class="btn btn-primary">update()</button>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                </ng-container>
+              </div>
+            </div>
+          </div>
+        </div>
+       </ng-template>
+    
+
+</div>
+

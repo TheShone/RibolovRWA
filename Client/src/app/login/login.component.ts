@@ -36,5 +36,6 @@ export class LoginComponent implements OnInit {
   login():void{
     const credentials = this.form.value;
     this.store.dispatch(UserActions.loginUser({user:{username:credentials.username,password:credentials.password}}))
+    
   }
 }

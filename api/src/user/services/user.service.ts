@@ -4,6 +4,7 @@ import { LoginDto, UserEntity } from '../models/user.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import * as bcrypt from 'bcrypt'; 
 import { JwtService } from '@nestjs/jwt';
+import { UserUpdateDto } from '../dto/user.dto';
 
 @Injectable()
 export class UserService {
@@ -14,8 +15,10 @@ export class UserService {
     ) {}
     async createUser(user: UserEntity){
         let userr = new UserEntity()
+        let userrr = new UserEntity()
+        userrr = await this.getUseraUsername(user.username)
         userr = await this.getUseraEmail(user.email)
-        if(userr)
+        if(userr||userrr)
         {
             throw new BadRequestException('Postoji user sa tim emailom')
         }
@@ -39,8 +42,22 @@ export class UserService {
     getUser(id: number){
         return this.userRepository.findOneById(id)
     }
-    updateUser(user: UserEntity){
-        return this.userRepository.update(user.id,user);
+    async updateUser(user: UserUpdateDto){
+        var userr = new UserEntity()
+        console.log(user)
+        userr = await this.userRepository.findOneById(user.id)
+        userr.ime=user.ime;
+        userr.prezime=user.prezime;
+        userr.username=user.username;
+        userr.email=user.email;
+        const hashedPassword = await bcrypt.hash(user.password, 10);
+        userr.password=hashedPassword;
+        userr.datumRodjenja=user.datumRodjenja
+        userr.slika=user.slika
+        userr.role='user'
+        console.log(userr)
+        this.userRepository.update(userr.id,userr);
+        return userr;
     }
     async getUseraEmail(email: string)
     {

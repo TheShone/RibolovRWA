@@ -18,7 +18,6 @@ export class RegisterComponent implements OnInit{
    bsRangeValue: Date[];
    maxDate = new Date();
    minDate = new Date();
-
    constructor(private formBuilder: FormBuilder, private http: HttpClient,
     private router:Router, private storage: AngularFireStorage, private registrationService:RegistrationService) {
       this.minDate.setDate(this.minDate.getDate() - 1);
@@ -37,25 +36,38 @@ export class RegisterComponent implements OnInit{
     })
   }
   register(): void {
-    
+      if(this.selectedFile)
+      {
       const filePath = `profile_images/${Date.now()}_${this.selectedFile!.name}`;
       const fileRef = this.storage.ref(filePath);
       const task = this.storage.upload(filePath, this.selectedFile);
       task.snapshotChanges().pipe(
         finalize(() => {
           fileRef.getDownloadURL().subscribe(async (url) => {
-            this.imageUrl = url; 
-
-            const formData = { ...this.form.getRawValue(), slika: this.imageUrl };
-            const provera:boolean=await this.registrationService.registerUser(formData)
-            if(provera){
-              this.router.navigate(['/login']);
-            }else{
-              alert("Doslo je do greske sa registrovanjem");
+            this.imageUrl = url;
+            console.log(this.form.value.datumRodjenja) 
+            if(this.form.value.ime!=='' && this.form.value.prezime!=='' && this.form.value.username!==''&&
+            this.form.value.email!==''&& this.form.value.password!==''&& this.form.value.datumRodjenja!==undefined)
+            {
+              const formData = { ...this.form.getRawValue(), slika: this.imageUrl };
+              const provera:boolean=await this.registrationService.registerUser(formData)
+              if(provera){
+                this.router.navigate(['/login']);
+              }else{
+                alert("Unesi sve podatkeee");
+              }
+            }
+            else{
+              alert('Unesi sve podatke')
             }
           });
         })
       ).subscribe();
+      }
+      else
+      {
+        alert("Unesite sliku")
+      }
 
   }
   onFileChange(event: any) {
