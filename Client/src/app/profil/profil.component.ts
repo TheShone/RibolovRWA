@@ -91,6 +91,7 @@ export class ProfilComponent implements OnInit {
   updateProfil(){
     if(this.selectedFile)
     {
+      console.log(this.password)
       this.filePath = `profile_images/${Date.now()}_${this.selectedFile!.name}`;
       const fileRef = this.storage.ref(this.filePath);
       const task = this.storage.upload(this.filePath, this.selectedFile);
@@ -99,8 +100,8 @@ export class ProfilComponent implements OnInit {
           fileRef.getDownloadURL().subscribe(async (url) => {
             this.imageUrl = url;
             if(this.imageUrl!==null)
-            { 
-              if(this.password!==' ')
+            {
+              if(this.password!=='')
               {
                 this.user = new UserModel(
                   this.id,

@@ -5,24 +5,22 @@
   </div>
   </div>
 <div id="glavni">
-  <ng-container *ngIf="isLoading$ | async; else artPiecesTemplate" class="ng-container">
+  <div class="rib-mesta-container">
+  <ng-container *ngIf="isLoading$ | async; else ribolovnaTemplate" class="ng-container">
     <button class="btn btn-primary" type="button" disabled>
       <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
       Loading...
     </button>
   </ng-container>
-  <ng-template #artPiecesTemplate>
-    <ng-container *ngFor="let mesto of ribMesta$ | async | filterPublisher:searchText" class="ng-container" >
-      <div class="container">
-        <div class="wrapper">
+  <ng-template #ribolovnaTemplate>
+    <ng-container *ngFor="let mesto of ribMesta$ | async | filterPublisher:searchText" >
+      <div class="rib-mesto-card col-md-4">
           <div class="banner-image" [ngStyle]="getBackgroundStyle(mesto.slika)"> </div>
           <h1> {{mesto.Naziv}}</h1>
           <p>by: {{mesto.user.username}} <br> published: {{formatDatumPostavljanja(mesto.datumPostavljanja)}}</p>
-        </div>
-         <div class="button-wrapper"> 
-           <button class="btn fill"><a [routerLink]="['/ribolovnoMesto', mesto.id]" class="btn mr-2">Detalji</a></button>
-         </div>
-           </div>
+         <button class="btn fill"><a [routerLink]="['/ribolovnoMesto', mesto.id]" class="btn mr-2">Detalji</a></button>
+      </div>
     </ng-container>
 </ng-template>
+  </div>
 </div>
