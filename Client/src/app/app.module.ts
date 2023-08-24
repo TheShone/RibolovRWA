@@ -42,6 +42,8 @@ import { GoogleMapsModule } from '@angular/google-maps';
 import { ProfilComponent } from './profil/profil.component'
 import { reducers6 } from './store/reducers/profil.reducers';
 import { ProfilEffects } from './store/effects/profile.effects';
+import { FilterPipe } from './utilities/filter.pipe';
+import { FilterPipePublisher } from './utilities/filterPublisher.pipe';
 @NgModule({
   declarations: [
     AppComponent,
@@ -55,7 +57,9 @@ import { ProfilEffects } from './store/effects/profile.effects';
     RatingComponent,
     MojaRibolovnaMestaComponent,
     MojeRibolovnoMestoComponent,
-    ProfilComponent
+    ProfilComponent,
+    FilterPipe,
+    FilterPipePublisher 
   ],
   providers: [DatePipe],
   imports: [

@@ -1,4 +1,4 @@
-import { Observable } from 'rxjs';
+import { Observable, defaultIfEmpty } from 'rxjs';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { RibolovnaMestaService } from '../services/ribolovnaMesta.service';
 import { RibolovnoMestoModel } from '../store/types/ribolovnoMesto.module';
@@ -16,11 +16,14 @@ export class RibolovnaMestaComponent implements OnInit {
   isLoading$ : Observable<boolean>;
   error$ : Observable<String | null>;
   ribMesta$ : Observable<RibolovnoMestoModel[]>;
+  searchText: any
   constructor(private ribolovnaMestaService: RibolovnaMestaService,private store: Store<RibolovnaMestaState>,private datePipe: DatePipe)
   {
     this.isLoading$ = this.store.select(selectorLoading);
     this.error$=this.store.select(selectorError);
-    this.ribMesta$=this.store.select(selectorRibMesta);
+    this.ribMesta$ = this.store.select(selectorRibMesta).pipe(
+      defaultIfEmpty([])
+    );
   }
   ngOnInit(): void {
       this.store.dispatch(RibolovnaMestaActions.getRibolovnaMesta())

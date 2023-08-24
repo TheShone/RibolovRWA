@@ -1,7 +1,13 @@
+#glavni2{
+  margin-top: 100px;
+  width:20%;
+  margin-left: auto;
+  margin-right: auto;
+}
 #glavni{
 
-    padding: 100px;
-
+    padding: 50px;
+    margin-top:-10px;
     align-items: center;
     justify-items: center;
     text-align: center;

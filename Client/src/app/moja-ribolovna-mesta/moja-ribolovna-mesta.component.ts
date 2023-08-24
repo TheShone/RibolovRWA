@@ -11,6 +11,7 @@ import { UserModel } from '../store/types/user.module';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { ProfilState } from '../store/types/profil.interface';
 import { profilSelector } from '../store/selectors/profile.selectors';
+import { defaultIfEmpty } from 'rxjs/operators';
 import * as ProfilActions from '../store/actions/profil.actions'
 @Component({
   selector: 'app-moja-ribolovna-mesta',
@@ -33,11 +34,14 @@ export class MojaRibolovnaMestaComponent implements OnInit {
   latitude: number= 0;
   longitude: number=0;
   id:number =0;
+  searchText:any;
   constructor(private store:Store<MojaRibolovnaMestaState>,private storee: Store<ProfilState>,private datePipe: DatePipe,private formBuilder: FormBuilder,private storage: AngularFireStorage)
   {
     this.isLoading$ = this.store.select(isLoadingSelector)
     this.error$=this.store.select(errorSelector)
-    this.ribMesta$=this.store.select(mojaRibMestaSelector)
+    this.ribMesta$ = this.store.select(mojaRibMestaSelector).pipe(
+      defaultIfEmpty([])
+    );
     this.profil$=this.storee.select(profilSelector)
   }
   ngOnInit(): void {

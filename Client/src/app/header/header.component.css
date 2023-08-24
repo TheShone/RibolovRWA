@@ -276,7 +276,12 @@ body {
     left: calc(100% - 30px);
     visibility: hidden;
   }
-  
+  #search{
+    padding: 5px
+  }
+  #inputSearch{
+    width:20%
+  }
   .navbar .dropdown .dropdown:hover>ul {
     opacity: 1;
     top: 0;

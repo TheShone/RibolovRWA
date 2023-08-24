@@ -1,3 +1,9 @@
+<div id="glavni2">
+  <div class="input-group">
+    <input type="search" class="form-control rounded" placeholder="Search po Oglašivaču" aria-label="Search" aria-describedby="search-addon" [(ngModel)]="searchText" />
+    <button type="button" class="btn btn-outline-primary">search</button>
+  </div>
+  </div>
 <div id="glavni">
   <ng-container *ngIf="isLoading$ | async; else artPiecesTemplate" class="ng-container">
     <button class="btn btn-primary" type="button" disabled>
@@ -6,7 +12,7 @@
     </button>
   </ng-container>
   <ng-template #artPiecesTemplate>
-    <ng-container *ngFor="let mesto of ribMesta$ | async" class="ng-container" >
+    <ng-container *ngFor="let mesto of ribMesta$ | async | filterPublisher:searchText" class="ng-container" >
       <div class="container">
         <div class="wrapper">
           <div class="banner-image" [ngStyle]="getBackgroundStyle(mesto.slika)"> </div>

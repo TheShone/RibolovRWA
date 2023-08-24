@@ -40,6 +40,15 @@ export class UserEffects{
         ),
         { dispatch: false } 
     );
+    logInUserFailure$ = createEffect(() =>
+        this.actions$.pipe(
+            ofType(UserActions.loginUserFailure),
+            tap(() => {
+                alert("Pogresni username ili sifra")
+            })
+        ),
+        { dispatch: false } 
+    );
     logOutUser$ = createEffect(() =>
     this.actions$.pipe(
         ofType(UserActions.logOutUser),
