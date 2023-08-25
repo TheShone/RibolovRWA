@@ -1,0 +1,29 @@
+<header id="header" class="fixed-top ">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3 col-md-3 col-3">
+                <div class="logo">
+                    <h1 class="logo me-auto me-lg-0"><a routerLink="/" class="nav-link px-2 link-secondary">Ribolov</a></h1>
+                </div>
+            </div>
+            <div class="col-md-9 col-sm-9 col-9 text-end">
+                <div class="menu_icon" (click)="openMenu()">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+                <div class="menu" [class.menuClass]="menuVariable">
+                    <ul>
+                        <li><a class="nav-link scrollto" routerLink="/">Home</a></li>
+                        <li><a class="nav-link scrollto" routerLink="/ribolovnaMesta">Ribolovna mesta</a></li>
+                        <li><a class="nav-link scrollto" routerLink="/mojaRibolovnaMesta">Moja ribolovna mesta</a></li>
+                        <li><a class="nav-link scrollto" routerLink="/profil">Profil</a></li>
+                        <li *ngIf="isLoggedIn" ><a class="nav-link scrollto" type="button" class="get-started-btn scrollto" (click)="logout()">Logout</a></li>
+                        <li *ngIf="!isLoggedIn"><a routerLink="/login" type="button" class="get-started-btn scrollto">Login</a></li>
+                        <li *ngIf="!isLoggedIn"><a routerLink="/register" type="button" class="get-started-btn scrollto">Register</a></li>                      
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>  
+</header>

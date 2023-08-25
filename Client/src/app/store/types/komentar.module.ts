@@ -2,7 +2,7 @@ import { RibolovnoMestoModel } from "./ribolovnoMesto.module";
 import { UserModel } from "./user.module";
 
 export interface Komentar {
-    //id:string,
+    id:number,
     Opis:string,
     Ocena:number,
     datumPostavljanja: Date,
@@ -11,7 +11,7 @@ export interface Komentar {
 }
 export class KomentarModel implements Komentar
 {
-    //id: string;
+    id:number;
     Opis: string;
     Ocena: number;
     datumPostavljanja: Date;
@@ -19,14 +19,14 @@ export class KomentarModel implements Komentar
     ribolovnoMesto: RibolovnoMestoModel;
 
     constructor(
-        //Id: string,
+        id:number,
         Opis: string,
         Ocena: number,
         DatumPostavljanja: Date,
         User: UserModel,
         RibolovnoMesto: RibolovnoMestoModel
     ) {
-        //this.id = Id;
+        this.id=id;
         this.Opis = Opis;
         this.Ocena = Ocena;
         this.datumPostavljanja = DatumPostavljanja;

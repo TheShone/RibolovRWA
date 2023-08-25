@@ -27,8 +27,9 @@ export class KomentarController {
     return this.komentarService.update(+id, updateKomentarDto);
   }
 
-  @Delete('obrisiKomentar:id')
-  remove(@Param('id') id: number) {
-    return this.komentarService.remove(+id);
+  @Delete('obrisiKomentar/:id')
+  obrisiKomentar(@Param('id') id: number) {
+    console.log(id)
+    return this.komentarService.removeKomentar(id);
   }
 }

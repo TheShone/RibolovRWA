@@ -27,6 +27,7 @@ export class RibolovnoMestoComponent implements OnInit{
   errorr$: Observable<String|null>
   komentari$: Observable<KomentarModel[]>
   dodajKomentar: boolean=false;
+  poklapanje: boolean=false;
   latitude!: number;
   longitude!: number;
   user!: UserModel;
@@ -35,6 +36,7 @@ export class RibolovnoMestoComponent implements OnInit{
   display: any;
   zoom = 12;
   maxZoom = 15;
+  naziv: string=''
   minZoom = 8;
   markers = []  as  any;
   center!: google.maps.LatLngLiteral;
@@ -59,6 +61,7 @@ export class RibolovnoMestoComponent implements OnInit{
       {
       this.latitude=ribMesto.Latitude
       this.longitude=ribMesto.Longitude
+      this.naziv=ribMesto.Naziv
       }
     })
   }
@@ -70,9 +73,9 @@ export class RibolovnoMestoComponent implements OnInit{
       },
       label: {
         color: 'red',
-        text: 'Marker label ' + (this.markers.length + 1),
+        text: this.naziv,
       },
-      title: 'Marker title ' + (this.markers.length + 1),
+      title: this.naziv,
       options: { animation: google.maps.Animation.BOUNCE },
     });
   }
@@ -142,7 +145,7 @@ export class RibolovnoMestoComponent implements OnInit{
     if (this.user!==null) {
       this.ribMesto$.subscribe(ribMesto => {
         if (ribMesto) {
-          const comment = new KomentarModel(this.kom, this.ocena, new Date(), this.user, ribMesto);
+          const comment = new KomentarModel(55,this.kom, this.ocena, new Date(), this.user, ribMesto);
           this.store.dispatch(KomentariActions.createComment({komentar: comment}))
           this.dodajKomentar=false;
         } else {
@@ -152,6 +155,12 @@ export class RibolovnoMestoComponent implements OnInit{
     } else {
       alert("Niste ulogovani");
     }  
+  }
+  delete(id:number){
+    if(confirm('Jeste sigurni da hocete da obrisete komentar'))
+    {
+      this.store.dispatch(KomentariActions.deleteComment({id}))
+    }
   }
   
 }

@@ -105,7 +105,9 @@
                                   {{komentar.Opis}}
                                 </p>
                                 <app-rating [initialRating]="komentar.Ocena" [locked]="true"></app-rating>
-                              </div>
+                                <button *ngIf="komentar.user.username==this.user.username"  type="submit" class="btn btn-primary" (click)="delete(komentar.id)">Delete</button>
+                                </div>
+                                
                           </div>
                           </div>
                         </ng-container>

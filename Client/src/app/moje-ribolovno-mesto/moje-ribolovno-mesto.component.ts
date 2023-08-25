@@ -78,6 +78,7 @@ export class MojeRibolovnoMestoComponent implements OnInit {
       {
       this.latitudee=ribMesto.Latitude
       this.longitudee=ribMesto.Longitude
+      this.naziv=ribMesto.Naziv
       }
     })
   }
@@ -89,9 +90,9 @@ export class MojeRibolovnoMestoComponent implements OnInit {
       },
       label: {
         color: 'red',
-        text: 'Marker label ' + (this.markers.length + 1),
+        text: this.naziv,
       },
-      title: 'Marker title ' + (this.markers.length + 1),
+      title: this.naziv,
       options: { animation: google.maps.Animation.BOUNCE },
     });
   }

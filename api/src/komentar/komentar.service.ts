@@ -38,8 +38,9 @@ export class KomentarService {
     return this.komentarRepository.update(komentar.id,komentar)
   }
 
-  remove(id: number) {
-    return this.komentarRepository.delete(id);
+  removeKomentar(id: number) {
+    this.komentarRepository.delete(id);
+    return id;
   }
   getKomentareZaRibolovnoMesto(id:number){
     return this.komentarRepository.createQueryBuilder('komentar')

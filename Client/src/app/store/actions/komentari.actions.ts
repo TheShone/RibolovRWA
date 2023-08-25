@@ -26,7 +26,19 @@ export const createCommentSuccess= createAction(
     props<{komentar: KomentarModel}>()
 )
 
-export const createPostFailure=createAction(
+export const createCommentFailure=createAction(
     '[Komentari Page] Post komentar failure',
     props<{error:string}>()
+)
+export const deleteComment= createAction(
+    '[Komentari Page] Delete Komentar',
+    props<{id:number}>()
+)
+export const deleteCommentSuccess = createAction(
+    '[Komentari Page] Delete Komentar Success',
+    props<{id: number}>()
+)
+export const deleteCommentFailure = createAction(
+    '[Komentari Page] Delete Komentar Failure',
+    props<{error: string}>()
 )

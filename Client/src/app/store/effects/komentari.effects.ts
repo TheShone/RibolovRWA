@@ -25,8 +25,19 @@ export class KomentariEffects{
         return this.komentariService.postKomentar(action.komentar).pipe(
             map((komentar)=>KomentarAction.createCommentSuccess({komentar})),
             catchError((error)=>
-            of(KomentarAction.createPostFailure({error:error.message}))
+            of(KomentarAction.createCommentFailure({error:error.message}))
             )
+        )
+    })
+   ))
+   removeKomentar$=createEffect(()=>
+   this.actions$.pipe(
+    ofType(KomentarAction.deleteComment),
+    mergeMap((action)=>{
+        return this.komentariService.removeKomentar(action.id).pipe(
+            map((id)=>KomentarAction.deleteCommentSuccess({id: action.id})),
+            catchError((error)=>
+            of(KomentarAction.deleteCommentFailure({error:error.message})))
         )
     })
    ))

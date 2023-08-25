@@ -156,7 +156,7 @@ p {
   background-color: rgba(17, 25, 40, 0.25);
   border-radius: 12px;
   align-items: center;
-  padding-top: 50px;
+  padding-top: 60px;
   padding-right: 50px;
   border: 1px solid rgba(255, 255, 255, 0.125);
   flex: 0 0 calc(33.333% - 40px); /* Adjust the width as needed for 3 items per row */
@@ -168,6 +168,9 @@ p {
   @media (max-width: 768px) {
     flex: 0 0 calc(100% - 40px); /* Full width for 1 item per row */
   }
+}
+.padding{
+  padding: 8px;
 }
 /* Clear the row every 3 items */
 .break {

@@ -44,6 +44,7 @@ import { reducers6 } from './store/reducers/profil.reducers';
 import { ProfilEffects } from './store/effects/profile.effects';
 import { FilterPipe } from './utilities/filter.pipe';
 import { FilterPipePublisher } from './utilities/filterPublisher.pipe';
+import { ResponsiveHeaderComponent } from './responsive-header/responsive-header.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -59,7 +60,8 @@ import { FilterPipePublisher } from './utilities/filterPublisher.pipe';
     MojeRibolovnoMestoComponent,
     ProfilComponent,
     FilterPipe,
-    FilterPipePublisher 
+    FilterPipePublisher,
+    ResponsiveHeaderComponent 
   ],
   providers: [DatePipe],
   imports: [

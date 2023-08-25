@@ -22,5 +22,9 @@ import { Observable } from 'rxjs';
       };
       return this.http.post<KomentarModel>('http://localhost:3000/komentar/addKomentar',komentarData,{withCredentials:true})
     }
+    removeKomentar(id: number)
+    {
+      return this.http.delete<number>(`http://localhost:3000/komentar/obrisiKomentar/${id}`,{withCredentials:true})
+    }
   }
   

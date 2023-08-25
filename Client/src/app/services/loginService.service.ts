@@ -12,7 +12,6 @@ export class LoginService {
 
   login(username: string, password: string): Observable<any> {
     const formData = { username, password };
-    console.log("poceo sam")
     return this.http.post<any>('http://localhost:3000/user/login', formData, { withCredentials: true });
   }
 }
