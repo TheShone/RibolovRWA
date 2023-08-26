@@ -32,6 +32,7 @@ export class ProfilComponent implements OnInit {
   email: string= ' ';
   password: string=' ';
   datumRodjenja: Date = new Date();
+  isLoggedIn:boolean= false;
   constructor(private store: Store<ProfilState>, private route:ActivatedRoute,private datePipe: DatePipe,private storage: AngularFireStorage,private formBuilder: FormBuilder)
   {
     this.isLoading$=this.store.select(isLoadingSelector)
@@ -64,6 +65,10 @@ export class ProfilComponent implements OnInit {
       datumRodjenja: new FormControl('',Validators.required),
       slika: new FormControl(null)
     });
+    this.profil$.subscribe((profil)=>{
+      if(profil)
+        this.isLoggedIn=true;
+    })
   }
   update(){
     this.updateRib=!this.updateRib;

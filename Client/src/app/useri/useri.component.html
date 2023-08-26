@@ -1,0 +1,55 @@
+<ng-container *ngIf="isAdmin; else UserTemplate">
+<div id="glavni2">
+    <div class="input-group">
+      <input type="search" class="form-control rounded" placeholder="Search po Oglašivaču" aria-label="Search" aria-describedby="search-addon" [(ngModel)]="searchText" />
+      <button type="button" class="btn btn-outline-primary">search</button>
+    </div>
+    </div>
+  <div id="glavni">
+    <div class="rib-mesta-container">
+    <ng-container *ngIf="isLoading$ | async; else ribolovnaTemplate" class="ng-container">
+      <button class="btn btn-primary" type="button" disabled>
+        <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
+        Loading...
+      </button>
+    </ng-container>
+    <ng-template #ribolovnaTemplate>
+      <ng-container *ngFor="let user of useri$ | async | filterUsers:searchText" >
+        <div class="rib-mesto-card col-md-4">
+            <div class="banner-image" [ngStyle]="getBackgroundStyle(user.slika!)"> </div>
+            <h1> {{user.username}}</h1>
+            <p>by: {{user.ime}}  {{user.prezime}} </p>
+           <button class="btn fill" (click)="deleteUser(user.id)">Obrisi</button>
+        </div>
+      </ng-container>
+  </ng-template>
+    </div>
+  </div>
+</ng-container>
+<ng-template #UserTemplate>
+  <section class="page_404">
+    <div class="container">
+      <div class="row"> 
+      <div class="col-sm-12 ">
+      <div class="col-sm-10 col-sm-offset-1  text-center">
+      <div class="four_zero_four_bg">
+        <h1 class="text-center ">404</h1>
+      
+      
+      </div>
+      
+      <div class="contant_box_404">
+      <h3 class="h2">
+      Look like you're lost
+      </h3>
+      
+      <p>the page you are looking for not avaible!</p>
+      
+      <a href="" class="link_404">Go to Home</a>
+    </div>
+      </div>
+      </div>
+      </div>
+    </div>
+  </section>
+</ng-template>

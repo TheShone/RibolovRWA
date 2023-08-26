@@ -34,6 +34,7 @@ export class MojeRibolovnoMestoComponent implements OnInit {
   isLoadingg$: Observable<boolean>
   errorr$: Observable<String|null>
   komentari$: Observable<KomentarModel[]>
+  mesto!:RibolovnoMestoModel
   updateRib: boolean=false;
   user!: UserModel;
   ocena: number = 0
@@ -56,6 +57,7 @@ export class MojeRibolovnoMestoComponent implements OnInit {
   maxZoom = 15;
   minZoom = 8;
   markers = []  as  any;
+  odgovarajuciUser:boolean=false;
   center!: google.maps.LatLngLiteral;
   options: google.maps.MapOptions = {
     zoomControl: false,
@@ -79,6 +81,7 @@ export class MojeRibolovnoMestoComponent implements OnInit {
       this.latitudee=ribMesto.Latitude
       this.longitudee=ribMesto.Longitude
       this.naziv=ribMesto.Naziv
+      this.mesto=ribMesto
       }
     })
   }
@@ -125,6 +128,9 @@ export class MojeRibolovnoMestoComponent implements OnInit {
     if(userJson!= null)
     {
       const userObject = JSON.parse(userJson);
+      this.ribMesto$.subscribe((ribMesto)=>{
+        this.odgovarajuciUser = userObject.username===ribMesto?.user!.username
+      })
       this.user = new UserModel(
         userObject.id,
         userObject.ime,

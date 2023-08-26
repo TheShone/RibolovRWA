@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Action } from '@ngrx/store';
+import { UserModel } from '../store/types/user.module';
 
 @Injectable({
   providedIn: 'root'
@@ -10,8 +11,8 @@ import { Action } from '@ngrx/store';
 export class LoginService {
   constructor(private http: HttpClient, private router: Router) {}
 
-  login(username: string, password: string): Observable<any> {
+  login(username: string, password: string): Observable<UserModel> {
     const formData = { username, password };
-    return this.http.post<any>('http://localhost:3000/user/login', formData, { withCredentials: true });
+    return this.http.post<UserModel>('http://localhost:3000/user/login', formData, { withCredentials: true });
   }
 }

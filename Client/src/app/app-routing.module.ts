@@ -8,6 +8,7 @@ import { RibolovnoMestoComponent } from './ribolovno-mesto/ribolovno-mesto.compo
 import { MojaRibolovnaMestaComponent } from './moja-ribolovna-mesta/moja-ribolovna-mesta.component';
 import { MojeRibolovnoMestoComponent } from './moje-ribolovno-mesto/moje-ribolovno-mesto.component';
 import { ProfilComponent } from './profil/profil.component';
+import { UseriComponent } from './useri/useri.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent},
@@ -17,7 +18,8 @@ const routes: Routes = [
   { path: 'ribolovnoMesto/:id' , component:RibolovnoMestoComponent},
   { path: 'mojaRibolovnaMesta', component:MojaRibolovnaMestaComponent},
   { path: 'mojeRibolovnoMesto/:id' , component:MojeRibolovnoMestoComponent},
-  { path: 'profil', component:ProfilComponent}
+  { path: 'profil', component:ProfilComponent},
+  { path: 'useri', component:UseriComponent}
 ];
 
 @NgModule({

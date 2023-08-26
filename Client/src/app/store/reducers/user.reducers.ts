@@ -10,14 +10,15 @@ export const initialState:UserState=adapter.getInitialState({
     isLoading:false,
     isLoggedIn: false,
     error:null,
+    user:null
 }) 
 
 export const reducers=createReducer(initialState,
     on(userActions.loginUser,(state)=>({...state,isLoading:true})),
-    on(userActions.loginUserSuccess,(state)=>({...state ,isLoading:false,isLoggedIn:true})),
+    on(userActions.loginUserSuccess,(state,action)=>({...state ,isLoading:false,isLoggedIn:true,user:action.user})),
     on(userActions.loginUserFailure,(state,action)=>({...state ,isLoading:false,isLoggedIn:false,error:action.error})),
     on(userActions.logOutUser,(state)=>({...state ,isLoading:true})),
-    on(userActions.logOutUserSuccess,(state)=>({...state ,isLoading:false,isLoggedIn:false})),
+    on(userActions.logOutUserSuccess,(state)=>({...state ,isLoading:false,isLoggedIn:false,user:null})),
     on(userActions.logOutUserFailure,(state,action)=>({...state ,isLoading:false,error:action.error})),
     on(userActions.browserRolead,(state,action)=>({...state ,isLoading:action.isLoading,isLoggedIn:action.isLoggedin}))
     )

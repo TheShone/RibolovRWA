@@ -4,8 +4,9 @@ import { HttpClient } from '@angular/common/http';
 import { AuthService } from '../services/authService.service';
 import { UserState } from '../store/types/user.interface';
 import { Store, select } from '@ngrx/store';
-import { selectUserFeature } from '../store/selectors/user.selectors';
+import { selectUserFeature, selectorUser } from '../store/selectors/user.selectors';
 import * as UserActions from '../store/actions/user.actions'
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-responsive-header',
@@ -14,7 +15,7 @@ import * as UserActions from '../store/actions/user.actions'
 })
 export class ResponsiveHeaderComponent implements OnInit {
   authenticated = true;
-  user!: UserModel | null;
+  user!: Observable<UserModel | null>;
   isLoggedIn!: boolean;
   isAdmin!: boolean;
  constructor(
@@ -31,18 +32,34 @@ export class ResponsiveHeaderComponent implements OnInit {
     this.isLoggedIn = userState.isLoggedIn;
     this.authenticated=userState.isLoggedIn
   });
+  this.user = this.store.select(selectorUser)
   const userJson=localStorage.getItem('loggedUser');
-    if(userJson!= null)
+    if(this.user)
     {
-      const userObject = JSON.parse(userJson);
-      const role = userObject.role;
-      if(role==='admin')
+      this.user.subscribe((user)=>{
+        if(user?.role==="admin")
+      {
         this.isAdmin=true;
-      console.log(this.isAdmin)
+      }
+      else
+      {
+        this.isAdmin=false;
+      }
+      })
     }
+    
+      const userObject = JSON.parse(userJson!);
+      if(userObject!==null)
+      {
+        const role = userObject.role;
+        if(role==='admin')
+          this.isAdmin=true;
+        else
+          this.isAdmin=false;
+      }
+     
 }
 logout(): void {
-  this.user=null
   this.store.dispatch(UserActions.logOutUser());
 }
 }

@@ -37,7 +37,11 @@ export class UserService {
         return this.userRepository.delete(id)
     }
     getAllUsers(){
-        return this.userRepository.find()
+        return this.userRepository.find(
+        { where:{
+            role:"user"
+        }}
+        )
     }
     getUser(id: number){
         return this.userRepository.findOneById(id)

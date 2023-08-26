@@ -13,6 +13,8 @@ import { ProfilState } from '../store/types/profil.interface';
 import { profilSelector } from '../store/selectors/profile.selectors';
 import { defaultIfEmpty } from 'rxjs/operators';
 import * as ProfilActions from '../store/actions/profil.actions'
+import { UseriState } from '../store/types/useri.interface';
+import { selectorUser } from '../store/selectors/user.selectors';
 @Component({
   selector: 'app-moja-ribolovna-mesta',
   templateUrl: './moja-ribolovna-mesta.component.html',
@@ -26,6 +28,7 @@ export class MojaRibolovnaMestaComponent implements OnInit {
   ribMesta$: Observable<RibolovnoMestoModel[]>
   selectedFile: File | null = null;
   user!: UserModel;
+  userr!: Observable<UserModel | null>;
   imageUrl: string | null = null;
   naziv: string = '';
   tipRibe: string = '';
@@ -35,7 +38,9 @@ export class MojaRibolovnaMestaComponent implements OnInit {
   longitude: number=0;
   id:number =0;
   searchText:any;
-  constructor(private store:Store<MojaRibolovnaMestaState>,private storee: Store<ProfilState>,private datePipe: DatePipe,private formBuilder: FormBuilder,private storage: AngularFireStorage)
+  isAdmin: boolean = false;
+  isLogedIn: boolean = false;
+  constructor(private store:Store<MojaRibolovnaMestaState>,private storee: Store<ProfilState>,private storeee: Store<UseriState>,private datePipe: DatePipe,private formBuilder: FormBuilder,private storage: AngularFireStorage)
   {
     this.isLoading$ = this.store.select(isLoadingSelector)
     this.error$=this.store.select(errorSelector)
@@ -45,10 +50,34 @@ export class MojaRibolovnaMestaComponent implements OnInit {
     this.profil$=this.storee.select(profilSelector)
   }
   ngOnInit(): void {
+    this.userr = this.storeee.select(selectorUser)
+    if(this.userr)
+    {
+      this.userr.subscribe((user)=>{
+        if(user?.role==="admin")
+      {
+        this.isAdmin=true;
+      }
+      else
+      {
+        this.isAdmin=false;
+      }
+      })
+    }
+    const loginObject = localStorage.getItem('isLoggedIn')
+    if(loginObject!= null)
+    {
+      this.isLogedIn=true;
+    }
     const userJson=localStorage.getItem('loggedUser');
     if(userJson!= null)
     {
       const userObject = JSON.parse(userJson);
+      const role = userObject.role;
+        if(role==='admin')
+          this.isAdmin=true;
+        else
+          this.isAdmin=false;
       this.id = userObject.id
       this.storee.dispatch(ProfilActions.getProfil({id:this.id}))
       this.store.dispatch(MojaRibolovnaMestaActions.getMojaRibolovnaMesta({id:this.id}))

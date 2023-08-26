@@ -16,7 +16,7 @@ export class UserEffects{
         ofType(UserActions.loginUser),
         mergeMap((user)=>{
             return this.loginService.login(user.user.username,user.user.password).pipe(
-                map(()=>UserActions.loginUserSuccess({message:"Uspesno"})),
+                map((user)=>UserActions.loginUserSuccess({user})),
                 catchError((error)=>
                     of(UserActions.loginUserFailure({error:error.message}))
                 )

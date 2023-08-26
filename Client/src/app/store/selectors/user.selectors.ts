@@ -14,3 +14,7 @@ export const selectorError = createSelector(
     selectUserFeature,
     (state:UserState)=>state.error
 );
+export const selectorUser=createSelector(
+    selectUserFeature,
+    (state:UserState)=>state.user
+)

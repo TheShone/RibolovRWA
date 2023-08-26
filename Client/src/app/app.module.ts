@@ -45,6 +45,10 @@ import { ProfilEffects } from './store/effects/profile.effects';
 import { FilterPipe } from './utilities/filter.pipe';
 import { FilterPipePublisher } from './utilities/filterPublisher.pipe';
 import { ResponsiveHeaderComponent } from './responsive-header/responsive-header.component';
+import { UseriComponent } from './useri/useri.component';
+import { UseriEffects } from './store/effects/useri.effects';
+import { reducers7 } from './store/reducers/useri.reducers';
+import { FilterUsers } from './utilities/filterUsers.pipe';
 @NgModule({
   declarations: [
     AppComponent,
@@ -61,7 +65,9 @@ import { ResponsiveHeaderComponent } from './responsive-header/responsive-header
     ProfilComponent,
     FilterPipe,
     FilterPipePublisher,
-    ResponsiveHeaderComponent 
+    ResponsiveHeaderComponent,
+    UseriComponent,
+    FilterUsers 
   ],
   providers: [DatePipe],
   imports: [
@@ -79,9 +85,10 @@ import { ResponsiveHeaderComponent } from './responsive-header/responsive-header
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFirestoreModule,
     StoreModule.forRoot({user:reducers,ribMesta:reducers2,ribMesto:reducers3, komentari:reducers4, mojaRibMesta:reducers5,
-    profil:reducers6}, {}),
+    profil:reducers6, useri:reducers7}, {}),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() }),
-    EffectsModule.forRoot([UserEffects,RibolovnaMestaEffects,RibolovnoMestoEffects,KomentariEffects,MojaRibMestaEffects,ProfilEffects])
+    EffectsModule.forRoot([UserEffects,RibolovnaMestaEffects,RibolovnoMestoEffects,KomentariEffects,MojaRibMestaEffects
+      ,ProfilEffects,UseriEffects])
   ],
   bootstrap: [AppComponent]
 })

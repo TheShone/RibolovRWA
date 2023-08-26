@@ -16,7 +16,8 @@
                     <ul>
                         <li><a class="nav-link scrollto" routerLink="/">Home</a></li>
                         <li><a class="nav-link scrollto" routerLink="/ribolovnaMesta">Ribolovna mesta</a></li>
-                        <li *ngIf="isLoggedIn"><a class="nav-link scrollto" routerLink="/mojaRibolovnaMesta">Moja ribolovna mesta</a></li>
+                        <li *ngIf="isLoggedIn && !isAdmin"><a class="nav-link scrollto" routerLink="/mojaRibolovnaMesta">Moja ribolovna mesta</a></li>
+                        <li *ngIf="isLoggedIn && isAdmin"><a class="nav-link scrollto" routerLink="/useri">Useri</a></li>
                         <li *ngIf="isLoggedIn"><a class="nav-link scrollto" routerLink="/profil">Profil</a></li>
                         <li *ngIf="isLoggedIn" ><a class="nav-link scrollto" type="button" class="get-started-btn scrollto" (click)="logout()">Logout</a></li>
                         <li *ngIf="!isLoggedIn"><a routerLink="/login" type="button" class="get-started-btn scrollto">Login</a></li>
