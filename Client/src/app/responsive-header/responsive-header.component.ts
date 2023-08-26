@@ -16,6 +16,7 @@ export class ResponsiveHeaderComponent implements OnInit {
   authenticated = true;
   user!: UserModel | null;
   isLoggedIn!: boolean;
+  isAdmin!: boolean;
  constructor(
   private httpClient: HttpClient,
     private authService: AuthService,
@@ -30,6 +31,15 @@ export class ResponsiveHeaderComponent implements OnInit {
     this.isLoggedIn = userState.isLoggedIn;
     this.authenticated=userState.isLoggedIn
   });
+  const userJson=localStorage.getItem('loggedUser');
+    if(userJson!= null)
+    {
+      const userObject = JSON.parse(userJson);
+      const role = userObject.role;
+      if(role==='admin')
+        this.isAdmin=true;
+      console.log(this.isAdmin)
+    }
 }
 logout(): void {
   this.user=null

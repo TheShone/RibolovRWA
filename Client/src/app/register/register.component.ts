@@ -45,9 +45,10 @@ export class RegisterComponent implements OnInit{
         finalize(() => {
           fileRef.getDownloadURL().subscribe(async (url) => {
             this.imageUrl = url;
+            console.log(this.form.getRawValue())
             console.log(this.form.value.datumRodjenja) 
             if(this.form.value.ime!=='' && this.form.value.prezime!=='' && this.form.value.username!==''&&
-            this.form.value.email!==''&& this.form.value.password!==''&& this.form.value.datumRodjenja!==undefined)
+            this.form.value.email!==''&& this.form.value.password!=='')
             {
               const formData = { ...this.form.getRawValue(), slika: this.imageUrl };
               const provera:boolean=await this.registrationService.registerUser(formData)

@@ -27,7 +27,7 @@
                   <h4 class="price">Datum Postavljanja: <span>{{ formatDatumPostavljanja((ribMesto$ | async)?.datumPostavljanja) }}</span></h4>
                   <h4 class="price">Oglašavač: <span>{{ (ribMesto$ | async)?.user?.username }}</span></h4>
                   <div class="action">
-                  <button class="add-to-cart btn btn-default" type="button" (click)="dodajKomentarClick()">Dodaj komentar</button>
+                  <button *ngIf="(ribMesto$ | async)?.user?.username!==this.user.username" class="add-to-cart btn btn-default" type="button" (click)="dodajKomentarClick()">Dodaj komentar</button>
                 </div>
                 </div>
                 <google-map height="500px"

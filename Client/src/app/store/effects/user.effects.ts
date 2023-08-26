@@ -35,7 +35,6 @@ export class UserEffects{
                     localStorage.setItem('isLoggedIn',"true");
                 })
                 this.router.navigate(['/']);
-
             })
         ),
         { dispatch: false } 
