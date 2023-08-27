@@ -1,4 +1,4 @@
-import { catchError, map, mergeMap, of } from 'rxjs';
+import { catchError, map, mergeMap, of, tap } from 'rxjs';
 import { Injectable } from "@angular/core";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { ProfilService } from "src/app/services/profil.service";
@@ -19,6 +19,11 @@ export class ProfilEffects{
             })
         )
     )
+    getProfilFailure$ = createEffect(()=>
+    this.actions$.pipe(
+        ofType(ProfilActions.getProfileFailure),
+        tap(()=>alert("Greska pri pribavljanju profila"))
+    ))
     putProfil$ = createEffect(()=>
     this.actions$.pipe(
         ofType(ProfilActions.updateProfil),
@@ -28,6 +33,11 @@ export class ProfilEffects{
                 catchError((error)=>of(ProfilActions.updateProfilFailure({error:error.message})))
             )
         })
+    ))
+    putProfilFailure$ = createEffect(()=>
+    this.actions$.pipe(
+        ofType(ProfilActions.updateProfilFailure),
+        tap(()=>alert("Greska pri updateovanju profila"))
     ))
     constructor(private actions$: Actions,private profileService: ProfilService){}
 

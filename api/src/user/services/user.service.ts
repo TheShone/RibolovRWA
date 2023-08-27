@@ -48,7 +48,6 @@ export class UserService {
     }
     async updateUser(user: UserUpdateDto){
         var userr = new UserEntity()
-        console.log(user)
         userr = await this.userRepository.findOneById(user.id)
         userr.ime=user.ime;
         userr.prezime=user.prezime;
@@ -59,7 +58,6 @@ export class UserService {
         userr.datumRodjenja=user.datumRodjenja
         userr.slika=user.slika
         userr.role='user'
-        console.log(userr)
         this.userRepository.update(userr.id,userr);
         return userr;
     }

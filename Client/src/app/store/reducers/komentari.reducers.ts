@@ -15,9 +15,11 @@ export const reducers4 = createReducer(initialState,
     return adapter.addMany(action.komentari,{...state,isLoadingg:false})
   }),
   on(komentariActions.getKomentareFailure,(state,action)=>({...state,errorr: action.error})),
+  on(komentariActions.createComment,(state)=>({...state,isLoadingg:true})),
   on(komentariActions.createCommentSuccess, (state,action)=> {
     return adapter.addOne(action.komentar, {...state, isLoadingg: false})
   }),
+  on(komentariActions.createCommentFailure,(state,action)=>({...state,error:action.error})),
   on(komentariActions.deleteComment,(state)=>({...state,isLoadingg:true})),
   on(komentariActions.deleteCommentSuccess,(state,action)=>{
     return adapter.removeOne(action.id,{...state,isLoadingg:false})

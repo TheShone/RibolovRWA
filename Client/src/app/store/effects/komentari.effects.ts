@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { RibolovnaMestaService } from "../../services/ribolovnaMesta.service";
 import * as KomentarAction from '../actions/komentari.actions'
-import { catchError, map, mergeMap, of } from "rxjs";
+import { catchError, map, mergeMap, of, tap } from "rxjs";
 import { KomentariService } from "src/app/services/komentarService.service";
 
 @Injectable()
@@ -18,6 +18,12 @@ export class KomentariEffects{
         })
     )
    )
+   getKomentareFailure$=createEffect(()=>
+        this.actions$.pipe(
+            ofType(KomentarAction.getKomentareFailure),
+            tap(()=>alert("Greska pri getovanju komentara"))
+        )
+   )
    postKomentar$=createEffect(()=>
    this.actions$.pipe(
     ofType(KomentarAction.createComment),
@@ -30,6 +36,12 @@ export class KomentariEffects{
         )
     })
    ))
+   postKomentarFailure$=createEffect(()=>
+        this.actions$.pipe(
+            ofType(KomentarAction.createCommentFailure),
+            tap(()=>alert("Greska pri kreiranju komentara"))
+        )
+   )
    removeKomentar$=createEffect(()=>
    this.actions$.pipe(
     ofType(KomentarAction.deleteComment),
@@ -41,6 +53,12 @@ export class KomentariEffects{
         )
     })
    ))
+   deleteKomentarFailure$=createEffect(()=>
+        this.actions$.pipe(
+            ofType(KomentarAction.deleteCommentFailure),
+            tap(()=>alert("Greska pri brisanju komentara"))
+        )
+   )
    constructor(private actions$: Actions, private komentariService:KomentariService){
 
    }

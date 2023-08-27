@@ -11,7 +11,7 @@ export const getMojaRibolovnaMestaSuccess = createAction(
     '[Moja Ribolovna Mesta Page] Get Moja Ribolovna Mesta success',
     props<{ribMesta: RibolovnoMestoModel[]}>()
 )
-export const getMojaRibolovnaMestaFailute = createAction(
+export const getMojaRibolovnaMestaFailure = createAction(
     '[Moja Ribolovna Mesta Page] Get Moja Ribolovna Mesta failure',
     props<{error:string}>()
 )
@@ -34,4 +34,8 @@ export const deleteRibolovnoMesto = createAction(
 export const deleteRibolovnoMestoSuccess = createAction(
     '[Moja Ribolovna Mesta Page], Delete Ribolovno Mesto Success',
     props<{id:number}>()
+)
+export const deleteRibolovnoMestoFailure = createAction(
+    '[Moja Ribolovna Mesta Page] Delete Ribolovno Mesto Failure',
+    props<{error:string}>()
 )

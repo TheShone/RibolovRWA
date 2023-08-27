@@ -18,11 +18,12 @@ export const reducers5 = createReducer(initialState,
     on(MojaRibolovnaMestaActions.getMojaRibolovnaMestaSuccess,(state,actions)=>{
         return adapter.addMany(actions.ribMesta,{...state,isLoading:false})
     }),
-    on(MojaRibolovnaMestaActions.getMojaRibolovnaMestaFailute,(state,actions)=>({...state,error:actions.error})),
+    on(MojaRibolovnaMestaActions.getMojaRibolovnaMestaFailure,(state,actions)=>({...state,error:actions.error})),
     on(MojaRibolovnaMestaActions.addRibolovnoMesto,(state)=>({...state,isLoading:true})),
     on(MojaRibolovnaMestaActions.addRibolovnoMestoSuccess,(state,action)=>{
         return adapter.addOne(action.ribMesto,{...state, isLoading:false})
     }),
+    on(MojaRibolovnaMestaActions.addRibolovnoMestoFailure,(state,action)=>({...state,error:action.error})),
     on(RibolovnoMestoAkcije.updateRibolovnoMesto,(state)=>({...state,isLoading:true})),
     on(RibolovnoMestoAkcije.updateRibolovnoMestoSuccess,(state,actions)=>{
         return adapter.updateOne({id:actions.ribMesto.id,changes:actions.ribMesto},{...state,isLoading:false})
@@ -31,5 +32,6 @@ export const reducers5 = createReducer(initialState,
     on(MojaRibolovnaMestaActions.deleteRibolovnoMesto,(state)=>({...state,isLoading:true})),
     on(MojaRibolovnaMestaActions.deleteRibolovnoMestoSuccess,(state,action)=>{
         return adapter.removeOne(action.id,{...state,isLoading:false})
-    })
+    }),
+    on(MojaRibolovnaMestaActions.deleteRibolovnoMestoFailure,(state,action)=>({...state,error:action.error}))
 )

@@ -69,6 +69,11 @@ export class UserEffects{
         ),
         { dispatch: false } 
     );
+    logOutUserFailure$ = createEffect(()=>
+    this.actions$.pipe(
+        ofType(UserActions.logOutUserFailure),
+        tap(()=>alert('Greska priligom logouta'))
+    ))
     
     constructor(private actions$: Actions, private loginService:LoginService,private router:Router,private authService: AuthService){
         

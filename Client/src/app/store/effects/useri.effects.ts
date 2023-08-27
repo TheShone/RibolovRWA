@@ -1,7 +1,7 @@
 import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { UserService } from "src/app/services/useriService.service";
 import * as UseriActions from '../actions/useri.actions'
-import { catchError, map, mergeMap, of } from "rxjs";
+import { catchError, map, mergeMap, of, tap } from "rxjs";
 import { Injectable } from "@angular/core";
 @Injectable()
 export class UseriEffects{
@@ -14,6 +14,11 @@ export class UseriEffects{
         ))
     )
     )
+    getUsereFailure$ = createEffect(()=>
+    this.actions$.pipe(
+        ofType(UseriActions.getUsereFailure),
+        tap(()=>alert('Greska pri pribavljanju Usera'))
+    ))
     deleteUser$ = createEffect(()=>
     this.actions$.pipe(
         ofType(UseriActions.deleteUser),
@@ -21,6 +26,11 @@ export class UseriEffects{
             map((user)=>UseriActions.deleteUserSuccess({id:action.id})),
             catchError((error)=>of(UseriActions.deleteUserFailure(error)))
         ))
+    ))
+    deleteUserFailure$ = createEffect(()=>
+    this.actions$.pipe(
+        ofType(UseriActions.deleteUserFailure),
+        tap(()=>alert('Greska pri brisanju Usera'))
     ))
     constructor(private actions$: Actions,private userService:UserService){
 

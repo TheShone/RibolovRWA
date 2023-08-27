@@ -18,6 +18,7 @@ export const reducers7 = createReducer(initialState,
     on(UseriActions.deleteUser,(state)=>({...state,isLoading:true})),
     on(UseriActions.deleteUserSuccess,(state,action)=>{
         return adapter.removeOne(action.id,{...state,isLoading:false})
-    })
+    }),
+    on(UseriActions.deleteUserFailure,(state,action)=>({...state,error:action.error}))
     
 )
