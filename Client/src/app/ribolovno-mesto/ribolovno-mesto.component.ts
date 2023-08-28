@@ -14,6 +14,8 @@ import { isLoadingSelectorr, selectErrorr, selectKomentare } from '../store/sele
 import * as KomentariActions from '../store/actions/komentari.actions'
 import { Collection } from 'ngx-pagination';
 import { UserModel } from '../store/types/user.module';
+import { UseriState } from '../store/types/useri.interface';
+import { selectorUser } from '../store/selectors/user.selectors';
 @Component({
   selector: 'app-ribolovno-mesto',
   templateUrl: './ribolovno-mesto.component.html',
@@ -26,7 +28,10 @@ export class RibolovnoMestoComponent implements OnInit{
   isLoadingg$: Observable<boolean>
   errorr$: Observable<String|null>
   komentari$: Observable<KomentarModel[]>
+  userr!: Observable<UserModel | null>;
   dodajKomentar: boolean=false;
+  isAdmin: boolean = false;
+  isLogedIn=false;
   poklapanje: boolean=false;
   latitude!: number;
   longitude!: number;
@@ -48,7 +53,7 @@ export class RibolovnoMestoComponent implements OnInit{
     maxZoom:this.maxZoom,
     minZoom:this.minZoom,
   }
-  constructor(private store: Store<RibolovnoMestoState>, private route:ActivatedRoute,private datePipe: DatePipe, private storee: Store<KomentariState>, private authService: AuthService)
+  constructor(private store: Store<RibolovnoMestoState>, private route:ActivatedRoute,private datePipe: DatePipe, private storee: Store<KomentariState>, private authService: AuthService,private storeee: Store<UseriState>)
   {
     this.isLoading$=this.store.select(isLoadingSelector)
     this.ribMesto$ = this.store.select(ribolovnoMestoSelector)
@@ -96,10 +101,34 @@ export class RibolovnoMestoComponent implements OnInit{
         }
       });
     })
+    const loginObject = localStorage.getItem('isLoggedIn')
+    if(loginObject!= null)
+    {
+      this.isLogedIn=true;
+    }
+    this.userr = this.storeee.select(selectorUser)
+    if(this.userr)
+    {
+      this.userr.subscribe((user)=>{
+        if(user?.role==="admin")
+      {
+        this.isAdmin=true;
+      }
+      else
+      {
+        this.isAdmin=false;
+      }
+      })
+    }
     const userJson=localStorage.getItem('loggedUser');
     if(userJson!= null)
     {
       const userObject = JSON.parse(userJson);
+      const role = userObject.role;
+        if(role==='admin')
+          this.isAdmin=true;
+        else
+          this.isAdmin=false;
       this.user = new UserModel(
         userObject.id,
         userObject.ime,
@@ -111,7 +140,7 @@ export class RibolovnoMestoComponent implements OnInit{
         userObject.slika
       );
     }
-    
+    console.log(this.isAdmin)
   }
   formatDatumPostavljanja(date: Date | string | undefined): string {
     if (date instanceof Date) {

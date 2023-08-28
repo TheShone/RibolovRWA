@@ -5,6 +5,7 @@ import * as bcrypt from 'bcrypt';
 import { JwtService } from '@nestjs/jwt';
 import {Response,Request} from 'express'
 import { AuthGuard} from '@nestjs/passport'
+import { AdminGuard } from '../amin-role.guard';
 
 @Controller('user')
 export class UserController {
@@ -19,10 +20,12 @@ export class UserController {
         return this.userService.createUser(userr)
     }
     @Delete('deleteUser/:id')
+    @UseGuards(AdminGuard)
     removeUser(@Param('id') id:number){
         return this.userService.deleteUser(id)
     }
     @Get('getAllUsers')
+    @UseGuards(AdminGuard)
     getUsers(){
         return this.userService.getAllUsers()
     }
@@ -65,7 +68,8 @@ export class UserController {
                 throw new UnauthorizedException();
             }
             const userr = await this.userService.getUseraUsername(data['username'])
-            const { password, ...result } = userr
+            const {password, ...result } = userr
+            console.log(userr)
             return result;
         }
         catch(e){

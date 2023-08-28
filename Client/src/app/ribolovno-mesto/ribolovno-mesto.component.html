@@ -1,11 +1,11 @@
 <div id="glavni">
-    <ng-container *ngIf="isLoading$ | async; else artPiecesTemplate" class="ng-container">
+    <ng-container *ngIf="isLoading$ | async; else mestaTemplate" class="ng-container">
       <button class="btn btn-primary" type="button" disabled>
         <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
         Loading...
       </button>
       </ng-container>
-      <ng-template #artPiecesTemplate>
+      <ng-template #mestaTemplate>
         <div class="container">
           <div class="card">
             <div class="container-fliud">
@@ -27,7 +27,10 @@
                   <h4 class="price">Datum Postavljanja: <span>{{ formatDatumPostavljanja((ribMesto$ | async)?.datumPostavljanja) }}</span></h4>
                   <h4 class="price">Oglašavač: <span>{{ (ribMesto$ | async)?.user?.username }}</span></h4>
                   <div class="action">
+                  <ng-container *ngIf="!isAdmin && isLogedIn">
                   <button *ngIf="(ribMesto$ | async)?.user?.username!==this.user.username" class="add-to-cart btn btn-default" type="button" (click)="dodajKomentarClick()">Dodaj komentar</button>
+                  </ng-container>
+
                 </div>
                 </div>
                 <google-map height="500px"
