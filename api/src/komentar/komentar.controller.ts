@@ -1,13 +1,15 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, Put } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Put, UseGuards } from '@nestjs/common';
 import { KomentarService } from './komentar.service';
 import { CreateKomentarDto } from './dto/create-komentar.dto';
 import { UpdateKomentarDto } from './dto/update-komentar.dto';
+import { UserGuard } from 'src/guards/user-role.guard';
 
 @Controller('komentar')
 export class KomentarController {
   constructor(private readonly komentarService: KomentarService) {}
 
   @Post('addKomentar')
+  @UseGuards(UserGuard)
   addKomentar(@Body() createKomentarDto: CreateKomentarDto) {
     return this.komentarService.create(createKomentarDto);
   }
@@ -28,6 +30,7 @@ export class KomentarController {
   }
 
   @Delete('obrisiKomentar/:id')
+  @UseGuards(UserGuard)
   obrisiKomentar(@Param('id') id: number) {
     console.log(id)
     return this.komentarService.removeKomentar(id);

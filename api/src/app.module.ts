@@ -7,15 +7,17 @@ import { UserModule } from './user/user.module';
 import { RibolovnoMestoModule } from './ribolovno-mesto/ribolovno-mesto.module';
 import { AuthModule } from './auth/auth.module';
 import { KomentarModule } from './komentar/komentar.module';
-import { AdminGuard } from './user/amin-role.guard';
+import { AdminGuard } from './guards/amin-role.guard';
 import { JwtModule } from '@nestjs/jwt';
+import { UserGuard } from './guards/user-role.guard';
+import { LoggedGuard } from './guards/logged.guard';
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
-    JwtModule.register({ 
+    JwtModule.register({
       secret: 'your-secret-key',
-      signOptions: { expiresIn: '1h' }
-  }),
+      signOptions: { expiresIn: '1h' },
+    }),
     TypeOrmModule.forRoot({
       type: 'postgres',
       host: process.env.POSTGRES_HOST,
@@ -24,7 +26,7 @@ import { JwtModule } from '@nestjs/jwt';
       password: process.env.POSTGRES_PASSWORD,
       database: process.env.POSTGRES_DATABASE,
       autoLoadEntities: true,
-      synchronize:true,
+      synchronize: true,
     }),
     UserModule,
     RibolovnoMestoModule,
@@ -32,6 +34,6 @@ import { JwtModule } from '@nestjs/jwt';
     KomentarModule,
   ],
   controllers: [AppController],
-  providers: [AppService,AdminGuard],
+  providers: [AppService, AdminGuard,UserGuard,LoggedGuard],
 })
 export class AppModule {}

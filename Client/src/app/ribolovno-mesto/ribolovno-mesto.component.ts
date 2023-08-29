@@ -140,7 +140,6 @@ export class RibolovnoMestoComponent implements OnInit{
         userObject.slika
       );
     }
-    console.log(this.isAdmin)
   }
   formatDatumPostavljanja(date: Date | string | undefined): string {
     if (date instanceof Date) {
