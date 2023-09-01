@@ -14,11 +14,11 @@ export class UseriEffects{
         ))
     )
     )
-    getUsereFailure$ = createEffect(()=>
-    this.actions$.pipe(
-        ofType(UseriActions.getUsereFailure),
-        tap(()=>alert('Greska pri pribavljanju Usera'))
-    ))
+    // getUsereFailure$ = createEffect(()=>
+    // this.actions$.pipe(
+    //     ofType(UseriActions.getUsereFailure),
+    //     tap(()=>alert('Greska pri pribavljanju Usera'))
+    // ))
     deleteUser$ = createEffect(()=>
     this.actions$.pipe(
         ofType(UseriActions.deleteUser),

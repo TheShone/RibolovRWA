@@ -18,7 +18,7 @@ import * as bcrypt from 'bcrypt';
 import { JwtService } from '@nestjs/jwt';
 import { Response, Request } from 'express';
 import { AuthGuard } from '@nestjs/passport';
-import { AdminGuard } from '../../guards/amin-role.guard';
+import { AdminGuard } from '../../guards/admin-role.guard';
 import { UserGuard } from 'src/guards/user-role.guard';
 import { LoggedGuard } from 'src/guards/logged.guard';
 
@@ -82,7 +82,6 @@ export class UserController {
       }
       const userr = await this.userService.getUseraUsername(data['username']);
       const { password, ...result } = userr;
-      console.log(userr);
       return result;
     } catch (e) {
       throw new UnauthorizedException();

@@ -4,7 +4,7 @@ import { UserController } from './controller/user.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { UserEntity } from './models/user.entity';
 import { JwtModule } from '@nestjs/jwt';
-import { AdminGuard } from '../guards/amin-role.guard';
+import { AdminGuard } from '../guards/admin-role.guard';
 import { LoggedGuard } from 'src/guards/logged.guard';
 import { UserGuard } from 'src/guards/user-role.guard';
 
@@ -16,7 +16,7 @@ import { UserGuard } from 'src/guards/user-role.guard';
       signOptions: { expiresIn: '1h' },
     }),
   ],
-  providers: [UserService, AdminGuard,LoggedGuard,UserGuard],
+  providers: [UserService, AdminGuard, LoggedGuard, UserGuard],
   controllers: [UserController],
   exports: [UserService],
 })

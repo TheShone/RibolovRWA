@@ -19,11 +19,11 @@ export class MojaRibMestaEffects{
         ))
     )
     )
-    getRibolovnaMestaFailure$ = createEffect(()=>
-    this.actions$.pipe(
-        ofType(MojaRibolovnaMestaActions.getMojaRibolovnaMestaFailure),
-        tap(()=>alert('Greska pri dobavljanju ribolovnih mesta'))
-    ))
+    // getRibolovnaMestaFailure$ = createEffect(()=>
+    // this.actions$.pipe(
+    //     ofType(MojaRibolovnaMestaActions.getMojaRibolovnaMestaFailure),
+    //     tap(()=>alert('Greska pri dobavljanju ribolovnih mesta'))
+    // ))
     postRibolovnoMesto$ = createEffect(()=>
     this.actions$.pipe(
         ofType(MojaRibolovnaMestaActions.addRibolovnoMesto),

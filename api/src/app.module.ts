@@ -7,7 +7,7 @@ import { UserModule } from './user/user.module';
 import { RibolovnoMestoModule } from './ribolovno-mesto/ribolovno-mesto.module';
 import { AuthModule } from './auth/auth.module';
 import { KomentarModule } from './komentar/komentar.module';
-import { AdminGuard } from './guards/amin-role.guard';
+import { AdminGuard } from './guards/admin-role.guard';
 import { JwtModule } from '@nestjs/jwt';
 import { UserGuard } from './guards/user-role.guard';
 import { LoggedGuard } from './guards/logged.guard';
@@ -34,6 +34,6 @@ import { LoggedGuard } from './guards/logged.guard';
     KomentarModule,
   ],
   controllers: [AppController],
-  providers: [AppService, AdminGuard,UserGuard,LoggedGuard],
+  providers: [AppService, AdminGuard, UserGuard, LoggedGuard],
 })
 export class AppModule {}
