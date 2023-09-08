@@ -12,7 +12,7 @@ export const initialState: KomentariState = adapter.getInitialState({
 export const reducers4 = createReducer(initialState,
   on(komentariActions.getKomentare,(state)=>({...state,isLoadingg:true})),
   on(komentariActions.getKomentareSuccess,(state,action)=>{
-    return adapter.addMany(action.komentari,{...state,isLoadingg:false})
+    return adapter.setAll(action.komentari,{...state,isLoadingg:false})
   }),
   on(komentariActions.getKomentareFailure,(state,action)=>({...state,errorr: action.error})),
   on(komentariActions.createComment,(state)=>({...state,isLoadingg:true})),

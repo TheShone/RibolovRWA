@@ -16,7 +16,7 @@ export const initialState:MojaRibolovnaMestaState=adapter.getInitialState({
 export const reducers5 = createReducer(initialState,
     on(MojaRibolovnaMestaActions.getMojaRibolovnaMesta,(state)=>({...state,isLoading:true})),
     on(MojaRibolovnaMestaActions.getMojaRibolovnaMestaSuccess,(state,actions)=>{
-        return adapter.addMany(actions.ribMesta,{...state,isLoading:false})
+        return adapter.setAll(actions.ribMesta,{...state,isLoading:false})
     }),
     on(MojaRibolovnaMestaActions.getMojaRibolovnaMestaFailure,(state,actions)=>({...state,error:actions.error})),
     on(MojaRibolovnaMestaActions.addRibolovnoMesto,(state)=>({...state,isLoading:true})),

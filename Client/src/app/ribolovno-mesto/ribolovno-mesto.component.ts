@@ -29,6 +29,7 @@ export class RibolovnoMestoComponent implements OnInit{
   errorr$: Observable<String|null>
   komentari$: Observable<KomentarModel[]>
   userr!: Observable<UserModel | null>;
+  ribolovnoMesto!: RibolovnoMestoModel;
   dodajKomentar: boolean=false;
   isAdmin: boolean = false;
   isLogedIn=false;
@@ -91,15 +92,18 @@ export class RibolovnoMestoComponent implements OnInit{
       this.storee.dispatch(KomentariActions.getKomentare({id}))
       this.ribMesto$.subscribe(ribMesto => {
         if (ribMesto) {
-          console.log(ribMesto.Latitude + " "+ ribMesto.Longitude)
           this.center={
             lat: +this.latitude,
             lng: +this.longitude
           };
           this.zoom = 12;
           this.addMarker();
+          this.ribolovnoMesto=ribMesto
         }
       });
+    })
+    this.komentari$.subscribe((komentari)=>{
+      console.log(komentari)
     })
     const loginObject = localStorage.getItem('isLoggedIn')
     if(loginObject!= null)
@@ -171,15 +175,9 @@ export class RibolovnoMestoComponent implements OnInit{
   }
   saveKomentarClick(){
     if (this.user!==null) {
-      this.ribMesto$.subscribe(ribMesto => {
-        if (ribMesto) {
-          const comment = new KomentarModel(55,this.kom, this.ocena, new Date(), this.user, ribMesto);
-          this.store.dispatch(KomentariActions.createComment({komentar: comment}))
-          this.dodajKomentar=false;
-        } else {
-          console.error("Ribolovno mesto nije pronađeno.");
-        }
-      });
+      const comment = new KomentarModel(55,this.kom, this.ocena, new Date(), this.user, this.ribolovnoMesto);
+      this.store.dispatch(KomentariActions.createComment({komentar: comment}))
+      this.dodajKomentar=false;
     } else {
       alert("Niste ulogovani");
     }  

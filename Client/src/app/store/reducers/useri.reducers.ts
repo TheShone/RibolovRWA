@@ -12,7 +12,7 @@ export const initialState: UseriState = adapter.getInitialState({
 export const reducers7 = createReducer(initialState,
     on(UseriActions.getUsere,(state)=>({...state,isLoading:true})),
     on(UseriActions.getUsereSuccess,(state,action)=>{
-        return adapter.addMany(action.useri,{...state,isLoading:false})
+        return adapter.setAll(action.useri,{...state,isLoading:false})
     }),
     on(UseriActions.getUsereFailure,(state,action)=>({...state,error:action.error})),
     on(UseriActions.deleteUser,(state)=>({...state,isLoading:true})),
