@@ -51,11 +51,20 @@ export class ResponsiveHeaderComponent implements OnInit {
       const userObject = JSON.parse(userJson!);
       if(userObject!==null)
       {
-        const role = userObject.role;
-        if(role==='admin')
-          this.isAdmin=true;
-        else
-          this.isAdmin=false;
+        const currentTime = (new Date()).getTime();
+        const expirationTime= userObject.expDate;
+        if(currentTime>expirationTime)
+        {
+          localStorage.removeItem('loggedUser')
+          localStorage.removeItem('isLoggedIn')
+        }
+        else{
+          const role = userObject.value.role;
+          if(role==='admin')
+            this.isAdmin=true;
+          else
+            this.isAdmin=false;
+          }
       }
      
 }

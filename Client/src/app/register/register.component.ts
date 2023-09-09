@@ -44,9 +44,7 @@ export class RegisterComponent implements OnInit{
       task.snapshotChanges().pipe(
         finalize(() => {
           fileRef.getDownloadURL().subscribe(async (url) => {
-            this.imageUrl = url;
-            console.log(this.form.getRawValue())
-            console.log(this.form.value.datumRodjenja) 
+            this.imageUrl = url; 
             if(this.form.value.ime!=='' && this.form.value.prezime!=='' && this.form.value.username!==''&&
             this.form.value.email!==''&& this.form.value.password!=='')
             {

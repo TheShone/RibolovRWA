@@ -73,12 +73,12 @@ export class MojaRibolovnaMestaComponent implements OnInit {
     if(userJson!= null)
     {
       const userObject = JSON.parse(userJson);
-      const role = userObject.role;
+      const role = userObject.value.role;
         if(role==='admin')
           this.isAdmin=true;
         else
           this.isAdmin=false;
-      this.id = userObject.id
+      this.id = userObject.value.id
       this.storee.dispatch(ProfilActions.getProfil({id:this.id}))
       this.store.dispatch(MojaRibolovnaMestaActions.getMojaRibolovnaMesta({id:this.id}))
     }
@@ -89,6 +89,7 @@ export class MojaRibolovnaMestaComponent implements OnInit {
       osvetljenost: new FormControl(''),
       latitude: new FormControl('',Validators.required),
       longitude: new FormControl('',Validators.email),
+      slika: new FormControl('')
     })
     if(userJson!= null)
     {
@@ -126,7 +127,6 @@ export class MojaRibolovnaMestaComponent implements OnInit {
                 { 
                 const ribMesto = new RibolovnoMestoModel(55,this.naziv,this.tipRibe,this.platforma,this.osvetljenost,this.latitude
                 ,this.longitude,new Date(),this.imageUrl,this.user)
-                console.log(ribMesto)
                 this.store.dispatch(MojaRibolovnaMestaActions.addRibolovnoMesto({ribMesto}))
                 }
                 else

@@ -49,6 +49,7 @@ import { UseriComponent } from './useri/useri.component';
 import { UseriEffects } from './store/effects/useri.effects';
 import { reducers7 } from './store/reducers/useri.reducers';
 import { FilterUsers } from './utilities/filterUsers.pipe';
+
 @NgModule({
   declarations: [
     AppComponent,

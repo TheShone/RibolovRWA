@@ -32,7 +32,6 @@ export class KomentarController {
   @Delete('obrisiKomentar/:id')
   @UseGuards(UserGuard)
   obrisiKomentar(@Param('id') id: number) {
-    console.log(id)
     return this.komentarService.removeKomentar(id);
   }
 }

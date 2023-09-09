@@ -128,20 +128,21 @@ export class MojeRibolovnoMestoComponent implements OnInit {
     if(userJson!= null)
     {
       const userObject = JSON.parse(userJson);
-      this.ribMesto$.subscribe((ribMesto)=>{
-        this.odgovarajuciUser = userObject.username===ribMesto?.user!.username
-      })
-      this.user = new UserModel(
-        userObject.id,
-        userObject.ime,
-        userObject.prezime,
-        userObject.username,
-        userObject.email,
-        undefined,
-        new Date(userObject.datumRodjenja),
-        userObject.slika
-      );
+        this.ribMesto$.subscribe((ribMesto)=>{
+          this.odgovarajuciUser = userObject.value.username===ribMesto?.user!.username
+        })
+        this.user = new UserModel(
+          userObject.value.id,
+          userObject.value.ime,
+          userObject.value.prezime,
+          userObject.value.username,
+          userObject.value.email,
+          undefined,
+          new Date(userObject.datumRodjenja),
+          userObject.value.slika
+        );
     }
+    
     
   }
   moveMap(event: google.maps.MapMouseEvent) {
@@ -206,7 +207,6 @@ export class MojeRibolovnoMestoComponent implements OnInit {
           {
             const ribMesto = new RibolovnoMestoModel(this.id,this.naziv,this.tipRibe,this.platforma,this.osvetljenost,this.latitude,this.longitude,
             this.datumPostavljanja,this.imageUrl,this.user)
-            console.log(ribMesto)
             this.store.dispatch(RibolovnoMestoAction.updateRibolovnoMesto({ribMesto}))
             this.updateRib=!this.updateRib;
             

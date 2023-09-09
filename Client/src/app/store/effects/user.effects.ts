@@ -31,8 +31,8 @@ export class UserEffects{
             ofType(UserActions.loginUserSuccess),
             tap(() => {
                 this.authService.getLoggedUser().subscribe((user)=>{
-                    localStorage.setItem('loggedUser', JSON.stringify(user));
-                    localStorage.setItem('isLoggedIn',"true");
+                    localStorage.setItem('loggedUser', JSON.stringify({value:user,expDate:(new Date()).getTime() + 3600 * 1000}));
+                    localStorage.setItem('isLoggedIn',JSON.stringify({value:true,expDate:(new Date()).getTime() + 3600 * 1000}));
                 })
                 this.router.navigate(['/']);
             })

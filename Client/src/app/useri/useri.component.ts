@@ -55,13 +55,12 @@ export class UseriComponent implements OnInit {
       const userObject = JSON.parse(userJson!);
       if(userObject!==null)
       {
-        const role = userObject.role;
+        const role = userObject.value.role;
         if(role==='admin')
           this.isAdmin=true;
         else
           this.isAdmin=false;
       }
-      console.log(this.isAdmin)
   }
   deleteUser(id:number){
     if(confirm('Jeste sigurni da zelite da obrisete usera'))

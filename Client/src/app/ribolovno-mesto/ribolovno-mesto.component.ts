@@ -102,9 +102,6 @@ export class RibolovnoMestoComponent implements OnInit{
         }
       });
     })
-    this.komentari$.subscribe((komentari)=>{
-      console.log(komentari)
-    })
     const loginObject = localStorage.getItem('isLoggedIn')
     if(loginObject!= null)
     {
@@ -128,21 +125,31 @@ export class RibolovnoMestoComponent implements OnInit{
     if(userJson!= null)
     {
       const userObject = JSON.parse(userJson);
-      const role = userObject.role;
+      const currentTime = (new Date()).getTime();
+      const expirationTime= userObject.expDate;
+      if(currentTime>expirationTime)
+      {
+        localStorage.removeItem('loggedUser')
+        localStorage.removeItem('isLoggedIn')
+      }
+      else{
+        
+      const role = userObject.value.role;
         if(role==='admin')
           this.isAdmin=true;
         else
           this.isAdmin=false;
-      this.user = new UserModel(
-        userObject.id,
-        userObject.ime,
-        userObject.prezime,
-        userObject.username,
-        userObject.email,
-        undefined,
-        new Date(userObject.datumRodjenja),
-        userObject.slika
-      );
+        this.user = new UserModel(
+          userObject.value.id,
+          userObject.value.ime,
+          userObject.value.prezime,
+          userObject.value.username,
+          userObject.value.email,
+          undefined,
+          new Date(userObject.value.datumRodjenja),
+          userObject.value.slika
+        );
+      }
     }
   }
   formatDatumPostavljanja(date: Date | string | undefined): string {

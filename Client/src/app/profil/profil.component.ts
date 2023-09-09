@@ -53,8 +53,9 @@ export class ProfilComponent implements OnInit {
     if(userJson!= null)
     {
       const userObject = JSON.parse(userJson);
-      this.id = userObject.id
+      this.id = userObject.value.id
       this.store.dispatch(ProfilActions.getProfil({id:this.id}))
+      
     }
     this.form = this.formBuilder.group({
       ime: new FormControl('',Validators.required),
@@ -63,7 +64,7 @@ export class ProfilComponent implements OnInit {
       email: new FormControl('',Validators.email),
       password: new FormControl('',Validators.required),
       datumRodjenja: new FormControl('',Validators.required),
-      slika: new FormControl(null)
+      slika: new FormControl('')
     });
     this.profil$.subscribe((profil)=>{
       if(profil)
@@ -77,7 +78,6 @@ export class ProfilComponent implements OnInit {
       const dateOfBirthDateOnly = new Date(profil!.datumRodjenja!)
         .toISOString()
         .split('T')[0];
-      console.log(dateOfBirthDateOnly)
       if(profil!==null)
       {
         this.form.patchValue({
@@ -96,7 +96,6 @@ export class ProfilComponent implements OnInit {
   updateProfil(){
     if(this.selectedFile)
     {
-      console.log(this.password)
       this.filePath = `profile_images/${Date.now()}_${this.selectedFile!.name}`;
       const fileRef = this.storage.ref(this.filePath);
       const task = this.storage.upload(this.filePath, this.selectedFile);
