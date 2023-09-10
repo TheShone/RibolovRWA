@@ -18,7 +18,7 @@
         <div class="rib-mesto-card col-md-4">
             <div class="banner-image" [ngStyle]="getBackgroundStyle(user.slika!)"> </div>
             <h1> {{user.username}}</h1>
-            <p>by: {{user.ime}}  {{user.prezime}} </p>
+            <p>{{user.ime}}  {{user.prezime}} </p>
            <button class="btn fill" (click)="deleteUser(user.id)">Obrisi</button>
         </div>
       </ng-container>

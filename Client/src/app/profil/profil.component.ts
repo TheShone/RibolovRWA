@@ -75,17 +75,16 @@ export class ProfilComponent implements OnInit {
     this.updateRib=!this.updateRib;
 
     this.profil$.subscribe(profil=>{
-      const dateOfBirthDateOnly = new Date(profil!.datumRodjenja!)
-        .toISOString()
-        .split('T')[0];
       if(profil!==null)
       {
+        const dateOfBirth = new Date(profil.datumRodjenja!);
+        const formattedDate = this.datePipe.transform(dateOfBirth, 'yyyy-MM-dd');
         this.form.patchValue({
           ime: profil.ime,
           prezime: profil.prezime,
           username: profil.username,
           email: profil.email,
-          datumRodjenja: dateOfBirthDateOnly,
+          datumRodjenja: formattedDate,
         });
       }
     })
