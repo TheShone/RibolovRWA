@@ -18,9 +18,13 @@ export class UserService {
         let userrr = new UserEntity()
         userrr = await this.getUseraUsername(user.username)
         userr = await this.getUseraEmail(user.email)
-        if(userr||userrr)
+        if(userr)
         {
             throw new BadRequestException('Postoji user sa tim emailom')
+        }
+        if(userrr)
+        {
+            throw new BadRequestException('Postoji user sa tim usernameom')
         }
         const newuser = new UserEntity()
         newuser.ime=user.ime;

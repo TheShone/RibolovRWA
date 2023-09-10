@@ -14,8 +14,9 @@ export class RegistrationService {
      await this.http.post('http://localhost:3000/user/addUser', formData).toPromise()
      return true;
     }
-    catch(error)
+    catch(error: any)
     {
+        alert(error.error.message)
         return false;
     }
   }

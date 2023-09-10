@@ -52,8 +52,6 @@ export class RegisterComponent implements OnInit{
               const provera:boolean=await this.registrationService.registerUser(formData)
               if(provera){
                 this.router.navigate(['/login']);
-              }else{
-                alert("Unesi sve podatkeee");
               }
             }
             else{
