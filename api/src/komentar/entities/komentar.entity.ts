@@ -16,9 +16,9 @@ export class KomentarEntity {
     @Column()
     datumPostavljanja:Date;
 
-    @ManyToOne(()=> RibolovnoMestoEntity, (ribolovnoMesto)=> ribolovnoMesto.komentari)
+    @ManyToOne(()=> RibolovnoMestoEntity, (ribolovnoMesto)=> ribolovnoMesto.komentari, {onDelete: 'CASCADE'})
     ribolovnoMesto: RibolovnoMestoEntity
 
-    @ManyToOne(() => UserEntity, (user) => user.komentari)
+    @ManyToOne(() => UserEntity, (user) => user.komentari, {onDelete: 'CASCADE'})
     user: UserEntity
 }

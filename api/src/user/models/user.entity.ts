@@ -31,9 +31,9 @@ export class UserEntity {
     @Column()
     slika:string;
 
-    @OneToMany(()=> RibolovnoMestoEntity, (ribMesto)=>ribMesto.user, { onDelete: 'CASCADE' })
+    @OneToMany(()=> RibolovnoMestoEntity, (ribMesto)=>ribMesto.user, { cascade: true })
         ribolovnaMesta: RibolovnoMestoEntity
-    @OneToMany(()=> KomentarEntity, (komentar)=> komentar.user, { onDelete: 'CASCADE' })
+    @OneToMany(()=> KomentarEntity, (komentar)=> komentar.user, { cascade: true })
         komentari: KomentarEntity
 }
 export class LoginDto{

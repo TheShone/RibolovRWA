@@ -29,9 +29,9 @@ export class RibolovnoMestoEntity {
     @Column()
     slika:string; 
 
-    @ManyToOne(() => UserEntity, (user) => user.ribolovnaMesta)
+    @ManyToOne(() => UserEntity, (user) => user.ribolovnaMesta, {onDelete: 'CASCADE'})
     user: UserEntity
 
-    @OneToMany(()=> KomentarEntity, (komentar)=> komentar.ribolovnoMesto, { onDelete: 'CASCADE' })
+    @OneToMany(()=> KomentarEntity, (komentar)=> komentar.ribolovnoMesto, { cascade: true })
         komentari: KomentarEntity
 }
